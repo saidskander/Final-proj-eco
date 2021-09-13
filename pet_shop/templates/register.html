@@ -1,0 +1,14 @@
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<form method="post" enctype="multipart/form-data">
+  <div>
+    {{ render_field(form.name) }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    <input type="text" name="photo">
+  </div>
+  <p><input type="submit" value="Register"></p>
+</form>
+{% endblock content %}

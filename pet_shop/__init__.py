@@ -11,4 +11,4 @@ app = Flask(__name__)  # 1
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data_shop.db'  # 1
 db = SQLAlchemy(app)  # 1
 
-from pet_shop import routes  # noqa: E402 # 1
+from pet_shop.admin import routes  # noqa: E402 # 1
