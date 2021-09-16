@@ -106,7 +106,7 @@ box-shadow: 0px 3px 10px rgba(0,0,0,.25);
     background-color: rgba(142, 68, 10, 0.94);
     opacity: 0.3;
   padding: 50px;
-  height: 600px;
+  height: 655px;
   width: 415px;
   border-radius: 30px;
 
@@ -136,17 +136,17 @@ box-shadow: 0px 3px 10px rgba(0,0,0,.25);
     position: relative;
     display: grid;
     grid-template-columns: 7% 93%;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     padding: .25rem 0;
     border-bottom: 1px solid var(--text-color);
 }
-/*=== Div focus ===*/
+
 .form-box.focus{
     border-bottom: 1px solid var(--first-color);
 }
 
 .form-box_div{
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .icon_forms{
@@ -154,7 +154,7 @@ box-shadow: 0px 3px 10px rgba(0,0,0,.25);
     color: var(--text-color);
     transition: .3s;
 }
-/*=== Icon focus ===*/
+
 .form-box.focus .icon_forms{
     color: var(--first-color);
 }
@@ -192,18 +192,28 @@ box-shadow: 0px 3px 10px rgba(0,0,0,.25);
     color: var(--first-color);
     transition: .3s;
 }
-.foget-passwd{
-    display: block;
+.register{
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  font-weight: 500;
+  transition: 0.5s;
+}
+.forget-passwd{
     text-align: right;
+    padding-left:  130px;
     margin-bottom: 2rem;
     font-size: var(--normal-font-size);
     color: var(--text-color);
     font-weight: 500;
-    transition: .5;
+    transition: 0.5s;
 }
-.foget-passwd:hover{
+
+.register:hover , .forget-passwd:hover{
     color: var(--first-color);
-    transition: .5s;
+    transition: 0.5s;
 }
 .submit-form{
     width: 100%;
@@ -275,7 +285,7 @@ box-shadow: 0px 3px 10px rgba(0,0,0,.25);
     .gif_animation{
         display: block;
         width: 700px;
-        margin-top: -120px;
+        margin-top: -140px;
         justify-self: center;
     }
 }

@@ -6,13 +6,15 @@ from pet_shop import app, db  # 1
 from flask import flash  # 2
 from .forms import RegistrationForm  # 2
 
-
+"""
 @app.route('/')  # 1
 def PStore():  # 1
-    """simple return string"""
+    simple return string
     return"Welcom to my new pet store"  # 1
+"""
 
 
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])  # 1
 def login():  # 1
     """login"""
