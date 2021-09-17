@@ -1,3 +1,4 @@
+ {% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +17,28 @@
     <div class="form">
       <img src="{{ url_for('static', filename='img/1.gif')}}" alt="" class="gif_animation">
       <div class="box-styles">
-        <form action="" class="container_form">
-          <h1 class="title_forms">Register</h1>
+        <form method="post" enctype="multipart/form-data" class="container_form" action="register">
+        {{ form.hidden_tag() }}
+         <h1 class="title_forms">Register</h1>
+          <div class="form-box form-box_div">
+            <div class="icon_forms">
+              <i class='bx bx-user'></i>
+            </div>
+            <div class="input-form">
+              <label for="" class="form_label-input"></label>
+              <!--<input type="text" class="form_label_input" placeholder="Email Adress">-->
+              {{ form.email(class="form_label_input", placeholder="Your Email Adress", type="text")}}   
+           </div>
+          </div>
+       {% if form.email.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.email.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ email }}
+        {% endif %}
 
           <div class="form-box form-box_div">
             <div class="icon_forms">
@@ -25,17 +46,21 @@
             </div>
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="text" class="form_label_input" placeholder="Email">
-            </div>
+              <!--<input type="text" class="form_label_input" placeholder="Your Full Name">-->
+              {{ form.name(class="form_label_input", placeholder="Your Full Name", type="text")}}
+
+           </div>
           </div>
 
+
           <div class="form-box form-box_div">
             <div class="icon_forms">
               <i class='bx bx-user'></i>
             </div>
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="text" class="form_label_input" placeholder="Username">
+              <!--<input type="text" class="form_label_input" placeholder="Username">-->
+              {{ form.username(class="form_label_input", placeholder="Username", type="text")}}
             </div>
           </div>
 
@@ -45,9 +70,26 @@
             </div>
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="password" class="form_label_input" placeholder="Password">
-            </div>
+              <!-- <input type="password" class="form_label_input" placeholder="Password"> -->
+              {{ form.password(class="form_label_input", placeholder="New Password", type="password")}}
+           </div>
           </div>
+
+
+
+        {% if form.password.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.password.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ password }}
+        {% endif %}
+
+
+
+
 
           <div class="form-box">
             <div class="icon_forms">
@@ -56,9 +98,26 @@
 
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="password" class="form_label_input" placeholder="Password">
-            </div>
+              <!-- <input type="password" class="form_label_input" placeholder="Password"> -->
+              {{ form.confirm(class="form_label_input", placeholder="Confirm Password", type="password") }}   
+         </div>
           </div>
+
+
+
+        {% if form.confirm.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.confirm.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ confirm }}
+        {% endif %}
+
+
+
+
 
 
 
@@ -78,6 +137,7 @@
             </div>
           </div>
         </form>
+{% endblock %}
       </div>
 
     </div>

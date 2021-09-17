@@ -8,6 +8,7 @@ Start sqlalchemy
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
 """
 app = Flask(__name__)  # 1
+app.config['SECRET_KEY'] = 'rzarzrzuaoiruzoprpuza'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data_shop.db'  # 1
 db = SQLAlchemy(app)  # 1
 
