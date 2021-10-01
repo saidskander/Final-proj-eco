@@ -31,3 +31,30 @@ class RegistrationForm(FlaskForm):  # 2
 
     """empty string in this PasswordField, used my own in html"""
     confirm = PasswordField('')  # 2
+
+
+    """Username is taken"""  # 4
+    def validate_username(self, username):  # 4
+        user = User.query.filter_by(username=username.data).first()  # 4
+        if user:  # 4
+            raise ValidationError('Username is taken')  # 4
+
+    """Email taken"""  # 4
+    def validate_email(self, email):  # 4
+        user = User.query.filter_by(email=email.data).first()  # 4
+        if user:  # 4
+            raise ValidationError('Email is taken')  # 4
+
+
+
+class LoginForm(FlaskForm):  # 4
+
+
+    """empty string in this StringField, used my own on html"""
+    email = StringField('', [validators.Length(min=6, max=35),
+                                          validators.Email()])  # 4
+
+    """empty string in this PasswordField, used my own in html"""
+    password = PasswordField('', [validators.DataRequired()])  # 4
+
+

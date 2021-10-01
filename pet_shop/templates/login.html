@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +17,21 @@
     <div class="bubble_2"></div>
     <div class="form">
       <img src="{{ url_for('static', filename='img/1.gif')}}" alt="" class="gif_animation">
+
       <div class="box-styles">
-        <form action="" class="container_form">
+<div class="alert">
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages  %}
+  {% for category, message in messages  %}
+   <div class="login_alert">
+    {{ message }}
+   </div>
+  {% endfor %}
+ {% endif %}
+{% endwith %}
+</div>
+        <form method="POST" class="container_form">
+         {{ form.hidden_tag() }}
           <h1 class="title_forms">Login</h1>
           <div class="form-box form-box_div">
             <div class="icon_forms">
@@ -25,9 +39,21 @@
             </div>
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="text" class="form_label_input" placeholder="Username">
-            </div>
+              <!--<input type="text" class="form_label_input" placeholder="Email">-->
+              {{ form.email(class="form_label_input", placeholder="Your Email Adress", type="text")}}
+           </div>
           </div>
+       <!--style my own error forms-->
+       {% if form.email.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.email.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ email }}
+        {% endif %}
+       <!--end style error forms-->
 
           <div class="form-box">
             <div class="icon_forms">
@@ -36,9 +62,24 @@
 
             <div class="input-form">
               <label for="" class="form_label-input"></label>
-              <input type="password" class="form_label_input" placeholder="Password">
-            </div>
+              <!--<input type="password" class="form_label_input" placeholder="Password">-->
+              {{ form.password(class="form_label_input", placeholder="Tyoe your Password", type="password") }}
+         </div>
           </div>
+
+
+       <!--style error forms-->
+        {% if form.password.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.password.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ password }}
+        {% endif %}
+       <!--end style error forms-->
+
           <a href="{{ url_for('register') }}" class="login">New Account?</a>
           <a href="#" class="forget-passwd">Forgot Password?</a>
 
@@ -56,7 +97,7 @@
           </div>
         </form>
       </div>
-
+<!--</div>flash-->
     </div>
 
   </div>
@@ -64,4 +105,4 @@
 </body>
 
 </html>
-
+{% endblock %}

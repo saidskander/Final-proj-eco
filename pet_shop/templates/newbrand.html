@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SKANDER</title>
+  </head>
+  <body>
+    {% block content %}
+<div class="alert">
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages  %}
+  {% for category, message in messages  %}
+   <div class="login_alert">
+    {{ message }}
+   </div>
+  {% endfor %}
+ {% endif %}
+{% endwith %}
+</div>
+
+
+<div class="alert">
+{% macro render_field(name) %}
+  <dt>{{ field.label }}
+  <dd>{{ field(**kwargs)|safe }}
+  {% if name.errors %}
+    <ul class=errors>
+    {% for error in name.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}
+</div>
+
+
+
+
+
+
+
+
+    <div class="newproductsection">
+      {% if brand_form %}
+      <h1>new brand</h1>
+      <form method="POST" action="">
+{{ form.name(class="addnewproductinput", placeholder="add new brand", type="text") }}
+{{ form.submit(type="submit", value="add new brand",  class="addnewproductinput") }}
+       <!--style my own error forms-->
+       {% if form.name.errors %}
+        {{ form.csrf_token }}
+        <div class="Field_is_not_matching">
+        {% for error in form.name.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ name }}
+        {% endif %}
+       <!--end style error forms-->
+      </form>
+    {% else %}
+
+
+
+    <h1>new Category</h1>
+      <form method="POST" action="">
+{{ form.csrf_token }}
+{{ form.name(type="text", placeholder="add new categ", class="addnewproductinput") }}
+{{ form.submit(type="submit", value="add new category", class="addnewproductinput") }}
+      <!--style my own error forms-->
+       {% if form.name.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.name.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ name }}
+        {% endif %}
+       <!--end style error forms-->  
+    </form>
+    {% endif %}
+    </div>
+    {% endblock content %}
+  </body>
+</html>
+
