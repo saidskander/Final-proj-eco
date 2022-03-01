@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+
+  <body>
+
+
+   <header>
+     <nav class="nav1">
+       <a href="#" class="first-li-logo">Eco/Admin</a>
+       <ul class="first-ul">
+         <li class="first-li "><button onclick="myFunction()" class="dropbtn"><i class="fa fa-user" style="font-size:20px;"></i></button></li>
+          <li id="myDropdown" class="dropdown-content">
+            <ul class="first-ul-button">
+              <li class="first-li-button"><a class="first-a-link-button" href="#">tigs</a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#">abc</a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#">settigsfdsqfdsqfdsq</a></li>
+              <!--SETTINGS AND LOGOUT WILL APEAR ALWAYS BY ROW(inline-block)-->
+              <li class="first-li "><a class="first-a-link" href="#">settigs</a></li>
+              <li class="first-li "><a class="first-a-link" href="#">logout</a></li>
+            </ul>
+         </li>
+         <!--
+         <li class="first-li "><a class="first-a-link" href="#"><i class="fa fa-user" style="font-size:36px;"></i></a></li>
+         <li class="first-li "><a class="first-a-link" href="#">Logout</a></li>
+         <li class="first-li "><a class="first-a-link" href="#">Settings</a></li>
+       -->
+       </ul>
+     </nav>
+   </header>
+<script type="text/javascript">
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+   <main class="pink">
+
+     <nav class="nav2 brown">
+       <ul class="second-ul">
+         <li class="second-li "><a class="second-a-link" href="#">Products</a></li>
+         <li class="second-li "><a class="second-a-link" href="#">Categories</a></li>
+         <li class="second-li "><a class="second-a-link" href="#">Brands</a></li>
+         <li class="second-li "><a class="second-a-link" href="#">New Category</a></li>
+         <li class="second-li "><a class="second-a-link" href="#">New Product</a></li>
+         <li class="second-li "><a class="second-a-link" href="#">New Brand</a></li>
+       </ul>
+     </nav>
+
+<div class="">
+  <div class="">
+  </div>
+</div>
+
+
+
+<section>
+  <h2>Notification</h2>
+  <aside class="blue">
+    <div class="red">
+    </div>
+  </aside>
+</section>
+
+   </main>
+
+
+   <footer>
+     <p>hellow world</p></footer>
+  </body>
+</html>
+
