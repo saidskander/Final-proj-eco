@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="master.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,12 +19,15 @@
          <li class="first-li "><button onclick="myFunction()" class="dropbtn"><i class="fa fa-user" style="font-size:20px;"></i></button></li>
           <li id="myDropdown" class="dropdown-content">
             <ul class="first-ul-button">
-              <li class="first-li-button"><a class="first-a-link-button" href="#">tigs</a></li>
-              <li class="first-li-button"><a class="first-a-link-button" href="#">abc</a></li>
-              <li class="first-li-button"><a class="first-a-link-button" href="#">settigsfdsqfdsqfdsq</a></li>
+              <li class="li-user-name"><a class="welcom-user" href="#">Welcom User!</a></li>
+              <li class="first-li-button"><a class="first-a-link-button top-border" href="#"><i class="fa fa-balance-scale" aria-hidden="true"> Bans</i></a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#"><i class="fa fa-moon-o" aria-hidden="true"> Display</i></a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#"><i class="fa fa-question" aria-hidden="true"> Support</i></a></li>
               <!--SETTINGS AND LOGOUT WILL APEAR ALWAYS BY ROW(inline-block)-->
-              <li class="first-li "><a class="first-a-link" href="#">settigs</a></li>
-              <li class="first-li "><a class="first-a-link" href="#">logout</a></li>
+              <li class="first-s-l">
+                <a class="first-a-link logout-settings l-r" href="#"><i class="fa fa-cog" aria-hidden="true"> Settigs</i></a>
+                <a class="first-a-link logout-settings l-l" href="#"><i class="fa fa-sign-out" aria-hidden="true"> Log Out</i></a>
+              </li>
             </ul>
          </li>
          <!--
@@ -42,6 +45,7 @@ function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
 
+
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
@@ -55,20 +59,23 @@ window.onclick = function(event) {
     }
   }
 }
+
 </script>
 
-   <main class="pink">
+   <main>
 
-     <nav class="nav2 brown">
+
+       <h2 class="h2-1">All great achievements require time.</h2>
+
        <ul class="second-ul">
-         <li class="second-li "><a class="second-a-link" href="#">Products</a></li>
-         <li class="second-li "><a class="second-a-link" href="#">Categories</a></li>
-         <li class="second-li "><a class="second-a-link" href="#">Brands</a></li>
-         <li class="second-li "><a class="second-a-link" href="#">New Category</a></li>
-         <li class="second-li "><a class="second-a-link" href="#">New Product</a></li>
-         <li class="second-li "><a class="second-a-link" href="#">New Brand</a></li>
+         <li class="second-li "><a class="second-a-link blue" href="#">Products</a></li>
+         <li class="second-li "><a class="second-a-link orange" href="#">Categories</a></li>
+         <li class="second-li "><a class="second-a-link yellow" href="#">Brands</a></li>
+         <li class="second-li "><a class="second-a-link pink" href="#">New Category</a></li>
+         <li class="second-li "><a class="second-a-link cyan" href="#">New Brand</a></li>
+         <li class="second-li "><a class="second-a-link green" href="#">New Product</a></li>
        </ul>
-     </nav>
+
 
 <div class="">
   <div class="">

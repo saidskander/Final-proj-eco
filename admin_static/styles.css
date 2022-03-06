@@ -5,10 +5,11 @@
   margin:0;
   padding:0;
   text-decoration: none;
+  list-style: none;
 }
 
 body{
-  background-color: rgb(159, 159, 159);
+  background-color: rgb(245 245 245);
   height: auto;
 }
 
@@ -26,7 +27,7 @@ body{
    font-weight: 900;
    text-transform: uppercase;
    display: block;
-   margin: 16px 90px;
+   margin: 16px 30px;
    /*test
    background-color: yellow;
    */
@@ -48,13 +49,19 @@ background-color: pink;
   display: inline;
 }
 
+.logout-setings{
+  padding: 0px 0px;
+}
+.logout-setings-right-border{
+  padding: 0px 0px;
+}
 /* --THIS WILL BRING ICON, user-LOGO, SETTINGS to the right side--*/
 header .nav1 .first-ul  .first-li{
   display: inline-block;
   list-style: none;
-  padding: 0 10px;
+  padding: 0 0px;
   float: right;
-  margin: 25px 10px;
+  margin: 8px 12px;
 }
 
 header .nav1 .first-ul  .first-li .first-a-link{
@@ -63,6 +70,18 @@ header .nav1 .first-ul  .first-li .first-a-link{
   color: rgb(51, 51, 51);
 }
 
+.li-user-name{
+  margin: 10px 0;
+  text-align: center;
+  border-bottom-color: #74737329;
+  border-bottom-style: inset;
+  padding-bottom: 5px;
+}
+.welcom-user{
+  font-family: 'Prompt', sans-serif;
+  text-decoration: none;
+  font-size: 25px;
+}
 .fa-user{
   margin-top: -10px;
   cursor: pointer;
@@ -79,13 +98,25 @@ header .nav1 .first-ul  .first-li .first-a-link{
 /*-- THE TRIPLE Dropdown STYLE --*/
 header .nav1 .first-ul-button  .first-li-button{
   list-style: none;
-  padding: 0 5px;
-  margin: 25px 10px;
+  margin: 0px 10px;
+    height: 65px;
 }
+/*
+.top-border{
+  border-top: 1px rgb(231, 121, 0);
+  border-top-style: inset;
+  border-top-color: rgba(61, 61, 61, 0.53);
+}
+*/
 header .nav1 .first-ul-button  .first-li-button .first-a-link-button{
   font-family: 'Prompt', sans-serif;
   font-size: 17px;
   color: rgb(51, 51, 51);
+/*
+  border-bottom-style: inset;
+  border-bottom-color: rgb(225 225 225 / 53%);
+  border-top-color: rgb(225 225 225 / 53%);
+*/
 }
 
 /* Dropdown Button */
@@ -93,7 +124,7 @@ header .nav1 .first-ul-button  .first-li-button .first-a-link-button{
   background-color: #626262;
   color: white;
   padding: 16px;
-  margin-top: -19px;
+  margin-top: 0px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -121,6 +152,9 @@ position: relative;
   margin-top: 70px;
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
   /*--
    right property to control
    the dropdown-content apsolute position
@@ -129,16 +163,72 @@ position: relative;
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content .first-a-link-button {
   color: black;
   padding: 12px 16px;
-  margin-top: 5px;
   text-decoration: none;
   display: block;
+
+}
+.dropdown-content .logout-settings {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+
+
 }
 
+.logout-settings {
+font-size: 17px;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+/*settings/logout style*/
+.l-r{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+.l-l{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/**/
+
+.first-s-l{
+  font-family: 'Prompt', sans-serif;
+  /*--i used font-size = 0 just to remove that ugly spacebetween logout and settings--*/
+  font-size: 0;
+  text-decoration: none;
+  list-style-type: none;
+  height: 72px;
+  border-top-color: #d1d1d129;
+  border-top-style: inset;
+  padding: 10px;
+  }
+
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content .first-a-link-button:hover {
+  background-color: rgba(223, 223, 223, 0.4);
+  border-radius: 10px;
+  border-bottom-style: inset;
+  border-bottom-color: rgb(0 0 0 / 53%);
+  border-top-color: rgb(0 0 0 / 53%);
+  border-top-style: inset;
+}
+.dropdown-content .first-a-link:hover {
+  background-color: rgba(223, 223, 223, 0.4);
+  border-radius: 10px;
+  border-bottom-style: inset;
+  border-bottom-color: rgb(0 0 0 / 53%);
+  border-top-color: rgb(0 0 0 / 53%);
+  border-top-style: inset;
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
@@ -147,37 +237,143 @@ position: relative;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.h2-1{
+  border-color: #2196F3!important;
+  border-left-style: solid;
+  color: #000!important;
+  background-color: #ddffff!important;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 10px 25px;
+  margin: 0 74vh;
+  border-radius: 0px 10px 10px 0px;
+}
+
 /* THIS IS SECOND NAV */
-header .nav2  .second-ul{
-  display: block;
-  margin: 0 50vh;
-}
-
-.second-li{
-  margin-right: -10px;
-}
-
-.second-ul .second-li{
-  display: inline;
-}
-
-/* --THIS WILL BRING ICON, LOGO, SETTINGS to the right side--*/
-header .nav2 .second-ul  .second-li{
-  display: inline-block;
-  list-style: none;
-  padding: 0 15px;
-  float: left;
-}
-
-header .nav2 .second-ul  .second-li .second-a-link{
+/*
   font-family: 'Prompt', sans-serif;
-  font-size: 17px;
-  color: rgb(51, 51, 51);
-}
-
+*/
 .second-ul{
-  margin: 100px;
-padding-left: 200px;
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.second-ul .second-li {
+  display: inline-block;
+  font-size: 20px;
+  /* just for testing
+  border-color: #fff900;
+  background-color: #ffff4154;
+  border-style: solid;
+  */
+  width: 200px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+ .second-a-link{
+   font-family: 'Prompt', sans-serif;
+   display: flex;
+   justify-content: center;
+   padding: 10px;
+   /*background: pink;*/
+}
+
+
+.second-ul .blue{
+  border-style: solid;
+  border-color: #bebff370;
+  background-color: #006bff54;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #4f5cf961;
+}
+.second-ul .orange{
+  border-style: solid;
+  border-color: #ffdda936;
+  background-color: #ffa0006e;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ff8d005c;
+}
+.second-ul .yellow{
+  border-style: solid;
+  border-color: #fffab936;
+  background-color: #fffa2296;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ffed006b;
+}
+.second-ul .pink{
+  border-style: solid;
+  border-color: #ff868636;
+  background-color: #ff00006e;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ff000040;
+}
+.second-ul .cyan{
+  border-style: solid;
+  border-color: #53ffd936;
+  background-color: #00ffbf6e;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #00ffcd5c;
+}
+.second-ul .green{
+  border-style: solid;
+  border-color: #aeffa936;
+  background-color: #00ff616e;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #00ff6157;
 }
 
 
@@ -195,20 +391,8 @@ padding-left: 200px;
 
 
 
-
-
-
-
-
-main{
-  background-color: blue;
-}
-
-.brown{
-  background-color: brown;
-}
 
 footer{
-  background-color: white;
+  background-color: pink;
 }
 
