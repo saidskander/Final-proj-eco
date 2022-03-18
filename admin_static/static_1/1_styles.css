@@ -1,0 +1,548 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  text-decoration: none;
+  list-style: none;
+}
+
+body{
+  background-color: #f0f4f5;
+  height: auto;
+}
+
+ header{
+   background-color: #ffffff;
+   width: 100%;
+   height: 70px;
+ }
+
+ /*--THIS WILL LOGOSTYLING--*/
+ .first-li-logo{
+   font-family: 'Prompt', sans-serif;
+   font-size: 24px;
+   color: rgb(51, 51, 51);
+   font-weight: 900;
+   text-transform: uppercase;
+   display: block;
+   margin: 16px 30px;
+   /*test
+   background-color: yellow;
+   */
+   /*--THIS WILL BRING LOGO TO THE LEFT--*/
+   float: left;
+ }
+
+/* THIS IS NAV */
+header .nav1  .first-ul{
+  display: block;
+  margin: 0 1vh;
+}
+/* test
+.first-li{
+background-color: pink;
+}
+*/
+.first-ul .first-li{
+  display: inline;
+}
+
+.logout-setings{
+  padding: 0px 0px;
+}
+.logout-setings-right-border{
+  padding: 0px 0px;
+}
+/* --THIS WILL BRING ICON, user-LOGO, SETTINGS to the right side--*/
+header .nav1 .first-ul  .first-li{
+  display: inline-block;
+  list-style: none;
+  padding: 0 0px;
+  float: right;
+  margin: 8px 12px;
+}
+
+header .nav1 .first-ul  .first-li .first-a-link{
+  font-family: 'Prompt', sans-serif;
+  font-size: 17px;
+  color: rgb(51, 51, 51);
+}
+
+.li-user-name{
+  margin: 10px 0;
+  text-align: center;
+  border-bottom-color: #74737329;
+  border-bottom-style: inset;
+  padding-bottom: 5px;
+}
+.welcom-user{
+  font-family: 'Prompt', sans-serif;
+  text-decoration: none;
+  font-size: 25px;
+}
+.fa-user{
+  margin-top: -10px;
+  cursor: pointer;
+  color: e9e9e9;
+  /*
+   --
+   POINTER-EVENT IS A CSS PROPERTY.
+   THIS WILL ALLOW ME TO CLICK INSIDE THE HOLE ICON AREA
+   --
+  */
+  pointer-events: none;
+}
+
+/*-- THE TRIPLE Dropdown STYLE --*/
+header .nav1 .first-ul-button  .first-li-button{
+  list-style: none;
+  margin: 0px 10px;
+    height: 65px;
+}
+/*
+.top-border{
+  border-top: 1px rgb(231, 121, 0);
+  border-top-style: inset;
+  border-top-color: rgba(61, 61, 61, 0.53);
+}
+*/
+header .nav1 .first-ul-button  .first-li-button .first-a-link-button{
+  font-family: 'Prompt', sans-serif;
+  font-size: 17px;
+  color: rgb(51, 51, 51);
+/*
+  border-bottom-style: inset;
+  border-bottom-color: rgb(225 225 225 / 53%);
+  border-top-color: rgb(225 225 225 / 53%);
+*/
+}
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: 70707033;
+  color: white;
+  padding: 16px;
+  margin-top: 0px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #e2e2e2;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  position:  absolute;
+  display: none;
+  overflow: auto;
+  z-index: 2;
+  min-width: 130px;
+  margin-top: 70px;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  /*--
+   right property to control
+   the dropdown-content apsolute position
+   --*/
+  right: 0vh;
+}
+
+/* Links inside the dropdown */
+.dropdown-content .first-a-link-button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+.dropdown-content .logout-settings {
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+
+
+}
+
+.logout-settings {
+font-size: 17px;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+/*settings/logout style*/
+.l-r{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+.l-l{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/**/
+
+.first-s-l{
+  font-family: 'Prompt', sans-serif;
+  /*--i used font-size = 0 just to remove that ugly spacebetween logout and settings--*/
+  font-size: 0;
+  text-decoration: none;
+  list-style-type: none;
+  height: 72px;
+  border-top-color: #d1d1d129;
+  border-top-style: inset;
+  padding: 10px;
+  }
+
+/* Change color of dropdown links on hover */
+.dropdown-content .first-a-link-button:hover {
+  background-color: rgba(223, 223, 223, 0.4);
+  border-radius: 10px;
+  border-bottom-style: inset;
+  border-bottom-color: rgb(0 0 0 / 53%);
+  border-top-color: rgb(0 0 0 / 53%);
+  border-top-style: inset;
+}
+.dropdown-content .first-a-link:hover {
+  background-color: rgba(223, 223, 223, 0.4);
+  border-radius: 10px;
+  border-bottom-style: inset;
+  border-bottom-color: rgb(0 0 0 / 53%);
+  border-top-color: rgb(0 0 0 / 53%);
+  border-top-style: inset;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+
+
+.second-nav{
+  padding-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container{
+  display:flex;
+  flex-grow: 1;
+  max-width: 141vh;
+  margin:auto;
+  border-radius: 25px;
+  background: #f0f4f5;
+  /* padding: 7px; */
+}
+
+	main, aside{
+    flex:0 100%;
+    height:400px;
+
+}
+.aside-notification{
+  text-align: center;
+}
+	aside{
+    /* border-top-right-radius: 15px; */
+    /* border-bottom-right-radius: 15px; */
+    float: right;
+    font-style: italic;
+    background: #ffffff;
+    flex: 0 0 200px;
+    height: 420px;
+    margin-left: 10px;
+    border-radius: 8px;
+}
+
+main{
+  /* border-top-left-radius: 15px; */
+  /* border-bottom-left-radius: 15px; */
+  background: #ffffff;
+  padding-top: 20px;
+  flex: 1 1 0px;
+  overflow: scroll;
+  border-radius: 8px;
+}
+
+	@media (max-width: 1341px){
+		main{
+			flex: 1 1 0px;
+			gin-left: 10px;
+			}
+		aside{
+			flex: 0 0 200px;
+			margin-left: 0px;
+			border-top-right-radius: 0px;
+			border-top-left-radius: 0px;
+			margin-left: 0px;
+			margin-left: 10px;
+			}
+    .container{
+      margin: 0 10px;
+      padding: 10px;
+
+    }
+    .h2-1{
+     margin: 0 10px !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+  .h2-1{
+    margin: 0 10px !important;
+  }
+  .container{
+    margin: 0 10px;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .h2-1{
+    padding: 10px 25px;
+    max-width: 10vh;
+    margin:auto;
+  }
+
+  main{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius:  0px;
+    flex: 0 0 400px;
+  }
+  aside{
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 0px;
+    flex: 1 1 600px;
+    margin-left: 0px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.h2-1{
+  border-color: #2196F3!important;
+  border-left-style: solid;
+  color: #000!important;
+  background-color: #ddffff!important;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 10px 25px;
+  border-radius: 0px 10px 10px 0px;
+  max-width: 134.5vh;
+  margin:auto;
+}
+
+/* THIS IS SECOND NAV */
+/*
+  font-family: 'Prompt', sans-serif;
+*/
+.second-ul{
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  margin: 6px 0;
+}
+
+.second-ul .second-li {
+  display: inline-block;
+  font-size: 20px;
+  /* just for testing
+  border-color: #fff900;
+  background-color: #ffff4154;
+  border-style: solid;
+  */
+  width: 200px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+ .second-a-link{
+   font-family: 'Prompt', sans-serif;
+   display: flex;
+   justify-content: center;
+   padding: 10px;
+   /*background: pink;*/
+}
+
+
+.second-ul .blue{
+  border-style: solid;
+  border-color: #bebff303;
+  background-color: #006bff7d;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #4f5cf98f;
+}
+.second-ul .orange{
+  border-style: solid;
+  border-color: #ffbf5e36;
+  background-color: #ffa00085;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ff8d0094;
+}
+.second-ul .yellow{
+  border-style: solid;
+  border-color: #f9f3a73d;
+  background-color: #fffa22b0;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ffed0091;
+}
+.second-ul .pink{
+  border-style: solid;
+  border-color: #ff666694;
+  background-color: #ff00008f;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #ff00005c;
+}
+.second-ul .cyan{
+  border-style: solid;
+  border-color: #53ffd900;
+  background-color: #00ffbfad;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #00ffcd85;
+}
+.second-ul .green{
+  border-style: solid;
+  border-color: #49ff8e;
+  background-color: #00ff619e;
+  border-radius: 10px;
+  box-shadow: 0px 5px 20px #00ff617d;
+}
+footer{
+  background-color: pink;
+}
+/*-- webkitscroll --*/
+/* width & height*/
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/*--WEBKITS---*/
+/* Track */
+::-webkit-scrollbar-track {
+  background: #efefef;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #efefef;
+  border-radius: 20px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  margin-top: 100px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(#6c6c6c, 0.91);
+}
+
