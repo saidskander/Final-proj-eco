@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+        <table class="table tbale-sm">
+            <thead>
+            <tr>
+                <th>Sr</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Brand</th>
+                <th>Edit</th>
+                <th>Delete</th>
+             </tr>
+            </thead>
+            <tbody>
+          {% for product in products %}
+            <tr>
+    <td>{{loop.index}}</td>
+    <td> <img src="{{url_for('static',filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" width="50" height="20" alt="img"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.discount }}</td>
+            <td>{{ product.brand.name}}</td>
+    <td> <a href="h.html" class="edit-buttons">Edit</a></td>
+    <td>
+      <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
+    </td>
+</tr>
+{% endfor %}
+   </tbody>
+</table>
+{% endblock content %}

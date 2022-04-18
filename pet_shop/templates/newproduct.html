@@ -1,0 +1,155 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<!--flash msg-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<!--end flash msg-->
+
+
+                <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}      
+                <div>
+                   <h3>Product Name</h3>
+                   {{ form.name(class="") }}<br>
+                   {% if form.name.errors %}
+                   {% for error in form.name.errors %}
+                   <span>{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ name }}
+                   {% endif %} 
+
+
+                   <h3>Prouct Price</h3>
+                   {{ form.price(class="") }}<br>
+                   {% if form.price.errors %}
+                   {% for error in form.price.errors %}
+                   <span>{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ price }}
+                   {% endif %}
+                   
+
+                   <h3>Product Discount</h3>
+                   {{ form.discount(class="") }}<br>
+                   {% if form.discount.errors %}
+                   {% for error in form.discount.errors %}
+                   <span>{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ discount }}
+                   {% endif %}
+
+
+
+
+                   <h3>Product Stock</h3>
+                   {{ form.stock(class="") }}<br>
+                   {% if form.stock.errors %}
+                   {% for error in form.stock.errors %}
+                   <span>{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ stock }}
+                   {% endif %} 
+
+
+                   <label for="brand">Add a brand</label>
+                    <select name="brand" id="brand" required>
+                        {% if getproduct %}
+                        <option value="{{getproduct.brand_id}}" style="display: none;">{{getproduct.brand.name}}</option>
+                        {% for brand in brands %}
+                        <option value="{{brand.id}}">{{brand.name}}</option>
+                        {% endfor %}
+                       {% else %}
+                     <option value=""> Select A brand</option>
+                     {% for brand in brands %}
+                     <option value="{{brand.id}}">{{brand.name}}</option>
+                     {% endfor %}
+                     {% endif %}
+                    </select>
+
+                    <label for="category">Add a category</label>
+                    <select name="category" id="category" class="" required>
+                    {% if getproduct %}
+                      <option value="{{getproduct.category_id}}" style="display: none;">{{getproduct.category.name}}</option>
+                      {% for category in categories %}
+                      <option value="{{category.id}}">{{category.name}}</option>
+                      {% endfor %}
+                     {% else %}
+                     <option value=""> Select A category</option>
+                     {% for category in categories %}
+                     <option value="{{category.id}}">{{category.name}}</option>
+                     {% endfor %}
+                     {% endif %}
+                    </select>
+
+                    <div class="row">
+                        {% if getproduct %}
+                        <div> <input type="file" name="image_1" id="image_1">
+                            <a href="{{url_for('static',filename='images/' + getproduct.image_1)}}"> images/{{ getproduct.image_1}}</a>
+                        </div>
+                        <div ><input type="file" name="image_2" id="image_2"> 
+                            <a href="{{url_for('static',filename='images/' + getproduct.image_2)}}">images/{{ getproduct.image_2}}</a>
+                        </div>
+                        
+                        <div class="col-md-4"><input type="file" name="image_3" id="image_3"> 
+                            <a href="{{url_for('static',filename='images/' + getproduct.image_3)}}"> image/{{ getproduct.image_3}}</a>
+                        </div>
+                      
+                        {% else %}
+                        <div class="">{{form.image_1}}</div>
+                        <div class="">{{form.image_2}}</div>
+                        <div class="">{{form.image_3}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <p><input type="submit" value="{% if getproduct %}Update {% else %}Add{% endif %} product" class="">
+                </form>
+<!--
+        <table class="table tbale-sm">
+            <thead>
+            <tr>
+                <th>Sr</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Brand</th>
+                <th>Edit</th>
+                <th>Delete</th>
+             </tr>
+            </thead>
+            <tbody>
+          {% for product in products %}
+            <tr>
+    <td>{{loop.index}}</td>
+    <td> <img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" width="50" height="20" alt="img"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.discount }}</td>
+            <td>{{ product.brand.name}}</td>
+    <td> <a href="h.html" class="edit-buttons">Edit</a></td>
+    <td>
+      <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
+    </td>
+</tr>
+{% endfor %}
+   </tbody>
+</table>
+-->
+
+{% endblock content %}

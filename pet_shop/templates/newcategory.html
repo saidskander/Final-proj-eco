@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+   {% block content %}
+<div class="alert">
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages  %}
+  {% for category, message in messages  %}
+   <div class="login_alert">
+    {{ message }}
+   </div>
+  {% endfor %}
+ {% endif %}
+{% endwith %}
+</div>
+
+
+
+    <h1>new Category</h1>
+      <form method="POST" action="">
+{{ form.csrf_token }}
+{{ form.name(type="text", placeholder="add new categ", class="addnewproductinput") }}
+{{ form.submit(type="submit", value="add new category", class="addnewproductinput") }}
+      <!--style my own error forms-->
+       {% if form.name.errors %}
+        <div class="Field_is_not_matching">
+        {% for error in form.name.errors %}
+         <span>{{ error }}<span>
+        {% endfor %}
+        </div>
+        {% else %}
+        {{ name }}
+        {% endif %}
+       <!--end style error forms-->
+    </form>
+
+                    <label for="category">current categories</label>
+                    {% if getproduct %}
+                      <div value="{{getproduct.category_id}}">{{getproduct.category.name}}</div>
+                      {% for category in categories %}
+                      <div value="{{category.id}}">{{category.name}}</div>
+                      {% endfor %}
+                     {% else %}
+                     <div value=""> Select A category</div>
+                     {% for category in categories %}
+                     <div value="{{category.id}}">{{category.name}}</div>
+                     {% endfor %}
+                     {% endif %}
+                    
+
+
+    {% endblock content %}

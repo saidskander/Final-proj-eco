@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title class="first-li-logo">{{title}}</title>
+    {% else %}
+    <title class="first-li-logo">Eco/Admin</title>
+    {% endif %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin.css')}}">
+  </head>
+
+  <body>
+
+
+
+   <header>
+     <nav class="nav1">
+       <a href="{{url_for('AdminHome')}}" class="first-li-logo" >Eco/Admin</a>
+       <ul class="first-ul">
+         <li class="first-li "><button onclick="myFunction()" class="dropbtn"><i class="fa fa-user" style="font-size:20px;"></i></button></li>
+          <li id="myDropdown" class="dropdown-content">
+            <ul class="first-ul-button">
+             {% if current_user.is_authenticated %}
+              <li class="li-user-name"><a class="welcom-user" href="#">welcom {{ current_user.username }}!</a></li>
+              <li class="first-li-button"><a class="first-a-link-button top-border" href="#"><i class="fa fa-balance-scale" aria-hidden="true"> Bans</i></a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#"><i class="fa fa-moon-o" aria-hidden="true"> Display</i></a></li>
+              <li class="first-li-button"><a class="first-a-link-button" href="#"><i class="fa fa-question" aria-hidden="true"> Support</i></a></li>
+              <!--SETTINGS AND LOGOUT WILL APEAR ALWAYS BY ROW(inline-block)-->
+              <li class="first-s-l">
+                <a class="first-a-link logout-settings l-r" href="#"><i class="fa fa-cog" aria-hidden="true"> Settigs</i></a>
+                <a class="first-a-link logout-settings l-l" href="{{ url_for('logout') }}"><i class="fa fa-sign-out" aria-hidden="true">Log out</i></a>
+
+             {% else %}
+                <a class="first-a-link logout-settings l-l" href="{{ url_for('AdminLogin') }}"> <i class="fa fa-sign-out" aria-hidden="true">Log in</i></a>
+             {% endif %}
+
+              </li>
+            </ul>
+         </li>
+         <!--
+         <li class="first-li "><a class="first-a-link" href="#"><i class="fa fa-user" style="font-size:36px;"></i></a></li>
+         <li class="first-li "><a class="first-a-link" href="#">Logout</a></li>
+         <li class="first-li "><a class="first-a-link" href="#">Settings</a></li>
+       -->
+       </ul>
+     </nav>
+   </header>
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+</script>
+
+
+
+
+
+
+
+
+<!--later i will update this nav and put it inside the main box(container)-->
+
+     <div class="second-nav">
+<div class="">
+       {# % if current_user.is_authenticated % #}
+    <h2 class="h2-1">All great achievements require time.</h2>
+  <ul class="second-ul">
+    <li class="second-li "><a class="second-a-link blue" href="{{url_for('AdminProducts')}}">Products</a></li>
+    <li class="second-li "><a class="second-a-link orange" href="#">Categories</a></li>
+    <li class="second-li "><a class="second-a-link yellow" href="#">Brands</a></li>
+    <li class="second-li "><a class="second-a-link pink" href="{{url_for('New_Category')}}">New Category</a></li>
+    <li class="second-li "><a class="second-a-link cyan" href="{{url_for('New_Brand')}}">New Brand</a></li>
+    <li class="second-li "><a class="second-a-link green" href="{{url_for('New_Product')}}">New Product</a></li>
+  </ul>
+
+</div>
+</div>
+
+
+<div class="container">
+     	<main>
+    {% block content %}
+
+    {% endblock content %}
+
+     	</main>
+     	<aside>
+        <h2 class="aside-notification">Notification</h2>
+     		<p>Aside..</p>
+    {% block aside %}
+
+    {% endblock aside %}
+     	</aside>
+     </div>
+
+    {# % else % #}
+    <h2 class="h2-1">You have to log in first.</h2>
+    {# % endif % #}
+
+
+   <footer>
+     <p></p></footer>
+  </body>
+
+
+</html>
+

@@ -1,17 +1,99 @@
 #!/usr/bin/env python3
 from pet_shop import db  # 3
 """https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/"""
-class User(db.Model):  # 3
-    id = db.Column(db.Integer, primary_key=True)  # 3
-    name = db.Column(db.String(30), unique=False, nullable=False)  # 3
-    username = db.Column(db.String(30), unique=True, nullable=False)  # 3
-    email = db.Column(db.String(120), unique=True, nullable=False)  # 3
-    image_file = db.Column(db.String(20), unique=False, nullable=False, default="default.png")  # 3
-    password = db.Column(db.String(60), unique=False, nullable=False)  # 3
+from pet_shop import login_manager, app
+from datetime import datetime
+from flask import current_app
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_login import UserMixin
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
+
+"""takes user id as an argumment"""
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+
+product_members = db.Table('product_members',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('newproduct_id', db.Integer, db.ForeignKey('newproduct.id'))
+)
+
+
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), unique=False, nullable=False)
+    username = db.Column(db.String(30), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    image_file = db.Column(db.String(20), unique=False, nullable=False, default="default.png")  # 3
+    password = db.Column(db.String(60), unique=False, nullable=False)
+    #newproduct_id = db.Column(db.Integer, db.ForeignKey('newproduct.id'))
+    #newproduct = db.relationship("NewProduct", backref=db.backref("product", uselist=False, lazy=True))
+    newproducts = db.relationship('NewProduct', backref='user', lazy="joined")
+    def get_reset_token(self, expires_sec=1800):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
+    @staticmethod
+    def verify_reset_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            user_id = s.loads(token)['user_id']
+        except:
+            return None
+        return User.query.get(user_id)
     def __repr__(self):  # 3
         """ return '<User %r>' % self.username  # 3 """
         return f"User(username='{self.username}',Email='{self.email}', image_file='{self.image_file}', password='{self.password})"
 
 
+
+
+class NewProduct(db.Model):
+    __tablename__ = 'newproduct'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    image_1 = db.Column(db.String(150), nullable=False, default='image.jpg')
+    image_2 = db.Column(db.String(150), nullable=False, default='image.jpg')
+    image_3 = db.Column(db.String(150), nullable=False, default='image.jpg')
+    price = db.Column(db.Numeric(precision=8, asdecimal=False, decimal_return_scale=None), nullable=False)
+#   price = db.Column(db.Numeric(10.2), nullable=False)
+    discount = db.Column(db.Integer, default=0)
+    stock = db.Column(db.Integer, nullable=False)
+    colors = db.Column(db.Text, nullable=False)
+    desc = db.Column(db.Text, nullable=False)
+    pub_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow())
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'),nullable=False)
+    category = db.relationship('CategoryName',backref=db.backref('categories', lazy=True))
+    brand_id = db.Column(db.Integer, db.ForeignKey('brand.id'),nullable=False)
+    brand = db.relationship('BrandName',backref=db.backref('brands', lazy=True))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        # return '<NewProduct %r>' % self.name
+        return f"NewProduct('{self.name}', '{self.image_1}', '{self.price}', '{self.discount}', '{self.stock}', '{self.colors}', '{self.pub_date}', '{self.brand_id}')"
+
+
+class BrandName(db.Model):  # 4
+    __tablename__ = 'brand'
+    id = db.Column(db.Integer, primary_key=True)  # 4
+    name = db.Column(db.String(30), unique=True, nullable=False)  # 4
+    def __repr__(self):  # 4
+        return '<BrandName %r>' % self.name  # 4
+
+
+class CategoryName(db.Model):  # 4
+    __tablename__ = 'category'
+    id = db.Column(db.Integer, primary_key=True)  # 4
+    name = db.Column(db.String(30), unique=True, nullable=False)  # 4
+    def __repr__(self):  # 4
+        return '<CategoryName %r>' % self.name  # 4
+
+
 db.create_all()
+db.session.commit()
