@@ -2,7 +2,7 @@
 
 
 from wtforms import BooleanField, StringField, SubmitField
-from wtforms import PasswordField, validators  # 2
+from wtforms import PasswordField, validators
 from .models import User
 from wtforms.validators import DataRequired
 from wtforms.validators import Length, Email, EqualTo, email_validator

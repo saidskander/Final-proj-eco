@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-
+        <main>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -13,6 +13,7 @@
 {% endwith %}
 
 
+
         <table class="table tbale-sm">
             <thead>
             <tr>
@@ -21,26 +22,29 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Discount</th>
-                <th>Brand</th>
+                <th>Brand</th> 
+                <th>DateTime</th>
                 <th>Edit</th>
-                <th>Delete</th>
+                <th>Del.</th>
              </tr>
             </thead>
             <tbody>
           {% for product in products %}
             <tr>
     <td>{{loop.index}}</td>
-    <td> <img src="{{url_for('static',filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" width="50" height="20" alt="img"></td>
+    <td> <img src="{{url_for('static',filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" width="50" height="50" alt="img"></td>
             <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.discount }}</td>
-            <td>{{ product.brand.name}}</td>
-    <td> <a href="h.html" class="edit-buttons">Edit</a></td>
+            <td>{{ product.price | numberFormat }}</td>
+            <td>{{ product.discount }}%</td>
+            <td><a href="{{ url_for('Brands') }}">{{ product.brand.name}}</a></td>
+            <td>{{ product.pub_date.strftime('%Y-%m-%d') }}</td>
+    <td> <a href="#" class="edit-buttons"><button class="edit-buttons">Edit</button></a></td>
     <td>
       <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
     </td>
 </tr>
 {% endfor %}
    </tbody>
-</table>
+  </table>
+</main>
 {% endblock content %}

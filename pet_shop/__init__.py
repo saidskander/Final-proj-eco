@@ -9,12 +9,12 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 
+
 """
 Start sqlalchemy
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/
 """
 """data_config"""
-basedir = os.path.abspath(os.path.dirname(__file__)) # using this for images
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 app.config['SECRET_KEY'] = 'rzarzrzuaoiruzoprpuza'  #  when using template form.hidden and bcrypt package2-3
@@ -22,22 +22,28 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data_shop.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 '''migrate'''
 migrate = Migrate(app, db)
+
 
 """bcrypt"""
 bcrypt = Bcrypt(app)
 
+
 """images_config"""
+basedir = os.path.abspath(os.path.dirname(__file__)) # using this for images
 app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'static/images/product_img')
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)
 
+
 """Login Managers"""
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.init_app(app)
+
 
 """mail_config"""
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -50,6 +56,8 @@ app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 app.config['MAIL_USERNAME'] = 'test2022xyz@gmail.com'
 app.config['MAIL_PASSWORD'] = 'azerty123-'
 mail = Mail(app)
+
+
 
 
 from pet_shop.admin import routes  # noqa: E402 # 1

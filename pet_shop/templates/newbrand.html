@@ -1,12 +1,11 @@
 {% extends 'layout.html' %}
    {% block content %}
+        <main  class="B-C">
 
+    <div class="alert-container">
 
-    <div class="brand-container">
-
-<h3>new brand</h3>
 <!--flash_message-->
-<div class="brand-container alert">
+<div class="alert-container brand-info">
 {% with messages = get_flashed_messages(with_categories=true) %}
  {% if messages  %}
   {% for category, message in messages  %}
@@ -20,15 +19,15 @@
 <!--end_flash_message-->
 
 
+    <div class="alert-container">
 
-    <div class="brand-container">
       <form method="POST" action="">
-{{ form.name(class="addnewproductinput", placeholder="add new brand", type="text") }}
-{{ form.submit(type="submit", value="add new brand",  class="addnewproductinput") }}
+{{ form.csrf_token }}
+{{ form.name(placeholder="TYPE YOUR NEW BRAND", type="text",class="addnewproductinput") }}
+
        <!--style my own error forms-->
        {% if form.name.errors %}
-        {{ form.csrf_token }}
-        <div class="Field_is_not_matching">
+        <div>
         {% for error in form.name.errors %}
          <span>{{ error }}<span>
         {% endfor %}
@@ -37,22 +36,10 @@
         {{ name }}
         {% endif %}
        <!--end style error forms-->
+       {{ form.submit(type="submit", value="ADD BRAND",class="addnewproductinput") }}
       </form>
     </div>
-
-
-                    <label for="brand">current brands</label>
-                    {% if get_brands %}
-                      <div value="{{get_brands.brand_id}}">{{get_brands.brand.name}}</div>
-                      {% for brand in brands %}
-                      <div value="{{brand.id}}">{{brand.name}}</div>
-                      {% endfor %}
-                     {% else %}
-                     {% for brand in brands %}
-                     <div value="{{brand.id}}">{{brand.name}}</div>
-                     {% endfor %}
-                     {% endif %}
-
-
+   </div>
+</main>
 
     {% endblock content %}

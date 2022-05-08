@@ -1,0 +1,90 @@
+
+{% extends 'layout.html' %}
+  {% block content %}
+        <main>
+
+<!--flash_message-->
+<div class="alert-container brand-info alert">
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages  %}
+  {% for category, message in messages  %}
+   <div class="login_alert">
+    {{ message }}
+   </div>
+  {% endfor %}
+ {% endif %}
+{% endwith %}
+</div>
+<!--end_flash_message-->
+
+
+{% if brand.user == current_user %}
+<table class="table tbale-sm">
+
+    <thead>
+    <tr>
+    <th>DateTime</th>
+    <th>Name</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>{{ brand.pub_date.strftime('%Y-%m-%d') }}</td>
+    <td class="brandname"><a href="{{url_for('brand', brand_id=brand.id)}}">{{brand.name}}</a></td>
+    <td>
+     <a href="{{url_for('Update_Brand', brand_id=brand.id) }}" class="edit-buttons">Edit</a>
+    </td>
+    <td>
+      <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
+    </td>
+</tr>
+
+</tbody>
+</table>
+
+            <div id="id01" class="modal">
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal"><!--×-->X</span>
+              <form class="modal-content" action="{{url_for('Delete_Brand', brand_id=brand.id) }}" method="POST">
+                <div class="dialog-container">
+                  <h1>Delete Category</h1>
+                  <p>Are you sure you want to delete this brand {{ brand.name }} ?</p>
+
+                  <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <button class="deletebtn" id="delete">Delete</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+a=document.getElementById("id01").value
+    document.getElementById("del").onclick=function(){
+        document.getElementById("id01").innerHTML=null
+    }
+    document.getElementById("del2").onclick=function(){
+        document.getElementById("id01").innerHTML=null
+    }
+    document.getElementById("del1").onclick=function(){
+            document.getElementById("ido1").innerHTML= null
+        }
+
+
+</script>
+
+
+{% endif %}
+        </main>
+{% endblock content %}

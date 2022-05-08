@@ -1,27 +1,32 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<main>
+
 <!--flash msg-->
+<div class="alert-container brand-info">
 {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul class=flashes>
     {% for message in messages %}
-      <li>{{ message }}</li>
+    <div>
+     {{ message }}
+    </div>
     {% endfor %}
-    </ul>
   {% endif %}
 {% endwith %}
+</div>
 <!--end flash msg-->
 
 
-                <form method="POST" enctype="multipart/form-data">
-                {{ form.hidden_tag() }}      
+                <form method="POST" enctype="multipart/form-data" action="New_Product">
+           
                 <div>
                    <h3>Product Name</h3>
-                   {{ form.name(class="") }}<br>
+                   {{ form.name(class="") }}
                    {% if form.name.errors %}
+                   <div>
                    {% for error in form.name.errors %}
-                   <span>{{ error }}<span>
+                   <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
                    {% else %}
@@ -30,10 +35,11 @@
 
 
                    <h3>Prouct Price</h3>
-                   {{ form.price(class="") }}<br>
+                   {{ form.price(class="") }}
                    {% if form.price.errors %}
+                   <div>
                    {% for error in form.price.errors %}
-                   <span>{{ error }}<span>
+                   <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
                    {% else %}
@@ -42,10 +48,11 @@
                    
 
                    <h3>Product Discount</h3>
-                   {{ form.discount(class="") }}<br>
+                   {{ form.discount(class="") }}
                    {% if form.discount.errors %}
+                   <div>
                    {% for error in form.discount.errors %}
-                   <span>{{ error }}<span>
+                   <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
                    {% else %}
@@ -56,10 +63,11 @@
 
 
                    <h3>Product Stock</h3>
-                   {{ form.stock(class="") }}<br>
+                   {{ form.stock(class="") }}
                    {% if form.stock.errors %}
+                   <div>
                    {% for error in form.stock.errors %}
-                   <span>{{ error }}<span>
+                   <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
                    {% else %}
@@ -67,22 +75,51 @@
                    {% endif %} 
 
 
-                   <label for="brand">Add a brand</label>
+
+                   <h3>Product colors</h3>
+                   {{ form.colors }}
+                   {% if form.colors.errors %}
+                   <div>
+                   {% for error in form.colors.errors %}
+                   <span class="alert-red">{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ colors }}
+                   {% endif %} 
+
+
+                   <h3>Product desc</h3>
+                   {{ form.desc(class="") }}
+                   {% if form.desc.errors %}
+                   <div>
+                   {% for error in form.desc.errors %}
+                   <span class="alert-red">{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ desc }}
+                   {% endif %} 
+
+                  </br>
+                   <label for="brand">Select a brand</label>
                     <select name="brand" id="brand" required>
                         {% if getproduct %}
                         <option value="{{getproduct.brand_id}}" style="display: none;">{{getproduct.brand.name}}</option>
                         {% for brand in brands %}
-                        <option value="{{brand.id}}">{{brand.name}}</option>
+                        <option value="{{brand.id}}">{{brand.form.name}}</option>
                         {% endfor %}
                        {% else %}
                      <option value=""> Select A brand</option>
                      {% for brand in brands %}
-                     <option value="{{brand.id}}">{{brand.name}}</option>
+                     <option value="{{brand.id}}">{{brand.form.name}}</option>
                      {% endfor %}
                      {% endif %}
                     </select>
 
-                    <label for="category">Add a category</label>
+                  </br>
+
+                    <label for="category">Select a category</label>
                     <select name="category" id="category" class="" required>
                     {% if getproduct %}
                       <option value="{{getproduct.category_id}}" style="display: none;">{{getproduct.category.name}}</option>
@@ -99,57 +136,67 @@
 
                     <div class="row">
                         {% if getproduct %}
-                        <div> <input type="file" name="image_1" id="image_1">
+
+                        <div>
+                            <input type="file" name="image_1" id="form.image_1">
                             <a href="{{url_for('static',filename='images/' + getproduct.image_1)}}"> images/{{ getproduct.image_1}}</a>
                         </div>
-                        <div ><input type="file" name="image_2" id="image_2"> 
+
+                        <div> 
+                            <input type="file" name="image_2" id="form.image_2"> 
                             <a href="{{url_for('static',filename='images/' + getproduct.image_2)}}">images/{{ getproduct.image_2}}</a>
                         </div>
                         
-                        <div class="col-md-4"><input type="file" name="image_3" id="image_3"> 
+                        <div>
+                            <input type="file" name="image_3" id="form.image_3"> 
                             <a href="{{url_for('static',filename='images/' + getproduct.image_3)}}"> image/{{ getproduct.image_3}}</a>
                         </div>
                       
                         {% else %}
-                        <div class="">{{form.image_1}}</div>
-                        <div class="">{{form.image_2}}</div>
-                        <div class="">{{form.image_3}}</div>
+
+                   <h3>Prouct image_1</h3>
+                   {{ form.image_1(class="") }}
+                   {% if form.image_1.errors %}
+                   <div>
+                   {% for error in form.image_1.errors %}
+                   <span class="alert-red">{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ image_1 }}
+                   {% endif %}
+
+
+                   <h3>Prouct image_2</h3>
+                   {{ form.image_2(class="") }}
+                   {% if form.image_2.errors %}
+                   <div>
+                   {% for error in form.image_2.errors %}
+                   <span class="alert-red">{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ image_2 }}
+                   {% endif %}
+
+
+                   <h3>Prouct image_3</h3>
+                   {{ form.image_3(class="") }}
+                   {% if form.image_3.errors %}
+                   <div>
+                   {% for error in form.image_3.errors %}
+                   <span class="alert-red">{{ error }}<span>
+                   {% endfor %}
+                   </div>
+                   {% else %}
+                   {{ image_3 }}
+                   {% endif %}
+
+
                         {% endif %}
                     </div>
                 </div>
-                <p><input type="submit" value="{% if getproduct %}Update {% else %}Add{% endif %} product" class="">
+                {{ form.submit(type="submit", value="add new product", class="addnewproductinput") }}
                 </form>
-<!--
-        <table class="table tbale-sm">
-            <thead>
-            <tr>
-                <th>Sr</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Discount</th>
-                <th>Brand</th>
-                <th>Edit</th>
-                <th>Delete</th>
-             </tr>
-            </thead>
-            <tbody>
-          {% for product in products %}
-            <tr>
-    <td>{{loop.index}}</td>
-    <td> <img src="{{url_for('static',filename='images/' + product.image_1)}}" alt="{{product.name}}" width="50" height="20" alt="img"></td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.discount }}</td>
-            <td>{{ product.brand.name}}</td>
-    <td> <a href="h.html" class="edit-buttons">Edit</a></td>
-    <td>
-      <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
-    </td>
-</tr>
-{% endfor %}
-   </tbody>
-</table>
--->
-
+        </main>
 {% endblock content %}

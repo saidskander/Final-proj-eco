@@ -1,6 +1,10 @@
 {% extends 'layout.html' %}
    {% block content %}
-<div class="alert">
+<main  class="B-C">
+
+<div class="alert-container">
+<!--flash msg-->
+<div class="alert-container brand-info">
 {% with messages = get_flashed_messages(with_categories=true) %}
  {% if messages  %}
   {% for category, message in messages  %}
@@ -11,17 +15,16 @@
  {% endif %}
 {% endwith %}
 </div>
+<!--end flash msg-->
 
-
-
-    <h1>new Category</h1>
-      <form method="POST" action="">
+<div class="alert-container">
+<form method="POST" action="">
 {{ form.csrf_token }}
-{{ form.name(type="text", placeholder="add new categ", class="addnewproductinput") }}
-{{ form.submit(type="submit", value="add new category", class="addnewproductinput") }}
+   {{ form.name(type="text", placeholder="TYPE YOUR NEW CATEGORY", class="addnewproductinput") }}
+
       <!--style my own error forms-->
        {% if form.name.errors %}
-        <div class="Field_is_not_matching">
+        <div>
         {% for error in form.name.errors %}
          <span>{{ error }}<span>
         {% endfor %}
@@ -30,21 +33,10 @@
         {{ name }}
         {% endif %}
        <!--end style error forms-->
+       {{ form.submit(type="submit", value="ADD CATEGORY", class="addnewproductinput") }}
     </form>
-
-                    <label for="category">current categories</label>
-                    {% if getproduct %}
-                      <div value="{{getproduct.category_id}}">{{getproduct.category.name}}</div>
-                      {% for category in categories %}
-                      <div value="{{category.id}}">{{category.name}}</div>
-                      {% endfor %}
-                     {% else %}
-                     <div value=""> Select A category</div>
-                     {% for category in categories %}
-                     <div value="{{category.id}}">{{category.name}}</div>
-                     {% endfor %}
-                     {% endif %}
-                    
-
+  </div>
+</div>                   
+        </main>
 
     {% endblock content %}

@@ -8,6 +8,7 @@ from flask import flash  # 2
 from .forms import RegistrationForm, ResetPasswordForm, RequestResetForm
 from .forms import LoginForm
 from .models import User  # 3
+#from pet_shop.products.models import BrandName
 from flask_login import current_user, logout_user, login_user
 from flask_mail import Message
 import os
@@ -18,7 +19,7 @@ def favicon():
     return "", 200
 
 
-# @app.route('/')
+@app.route('/')
 @app.route('/AdminHome', methods=['GET', 'POST'])  # 1
 def AdminHome():  # 1
     """simple return string"""

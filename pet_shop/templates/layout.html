@@ -83,12 +83,12 @@ window.onclick = function(event) {
 
      <div class="second-nav">
 <div class="">
-       {# % if current_user.is_authenticated % #}
+       {% if current_user.is_authenticated %}
     <h2 class="h2-1">All great achievements require time.</h2>
   <ul class="second-ul">
     <li class="second-li "><a class="second-a-link blue" href="{{url_for('AdminProducts')}}">Products</a></li>
-    <li class="second-li "><a class="second-a-link orange" href="#">Categories</a></li>
-    <li class="second-li "><a class="second-a-link yellow" href="#">Brands</a></li>
+    <li class="second-li "><a class="second-a-link orange" href="{{url_for('Categories')}}">Categories</a></li>
+    <li class="second-li "><a class="second-a-link yellow" href="{{url_for('Brands')}}">Brands</a></li>
     <li class="second-li "><a class="second-a-link pink" href="{{url_for('New_Category')}}">New Category</a></li>
     <li class="second-li "><a class="second-a-link cyan" href="{{url_for('New_Brand')}}">New Brand</a></li>
     <li class="second-li "><a class="second-a-link green" href="{{url_for('New_Product')}}">New Product</a></li>
@@ -99,12 +99,9 @@ window.onclick = function(event) {
 
 
 <div class="container">
-     	<main>
     {% block content %}
 
     {% endblock content %}
-
-     	</main>
      	<aside>
         <h2 class="aside-notification">Notification</h2>
      		<p>Aside..</p>
@@ -114,9 +111,9 @@ window.onclick = function(event) {
      	</aside>
      </div>
 
-    {# % else % #}
+    {% else %}
     <h2 class="h2-1">You have to log in first.</h2>
-    {# % endif % #}
+    {% endif %}
 
 
    <footer>
