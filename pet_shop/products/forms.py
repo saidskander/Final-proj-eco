@@ -25,9 +25,9 @@ class NewProduct_forms(FlaskForm):
     colors = StringField('', [validators.DataRequired("maximum letters 10"), validators.Length(max=10)])
     desc = TextAreaField('', [validators.DataRequired("maximum letters 160"), validators.Length(max=160)])
 
-    image_1 = FileField('', validators=[FileRequired(), FileAllowed(['jpg','png','jpeg'])])
-    image_2 = FileField('', validators=[FileRequired(), FileAllowed(['jpg','png','jpeg'])])
-    image_3 = FileField('', validators=[FileRequired(), FileAllowed(['jpg','png','jpeg'])])
+    image_1 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
+    image_2 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
+    image_3 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
 
     submit = SubmitField("")
 

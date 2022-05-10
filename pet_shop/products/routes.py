@@ -20,10 +20,6 @@ def categories():
     categories = CategoryName.query.join(NewProduct,(CategoryName.id == NewProduct.category_id)).all()
     return categories
 
-def products():
-    products = NewProduct.query.join(User,(NewProduct.id == User.newproduct_id)).all()
-    return products
-
 
 
 # @app.route('/')
@@ -39,9 +35,9 @@ def AdminProducts():
 def New_Product():
     brands = BrandName.query.all()
     categories = CategoryName.query.all()
-    form = NewProduct_forms(request.form)
-    if request.method == 'POST' and form.validate() and "form.image_1" in request.files:
-        """request.method == 'POST'  and"""
+    form = NewProduct_forms()
+    if request.method == 'POST' and form.validate_on_submit() and "image_1" in request.files:
+        """Adding a new product"""
         name = form.name.data
         price = form.price.data
         discount = form.discount.data
@@ -51,9 +47,9 @@ def New_Product():
         user_id = current_user.id
         brand = request.form.get('brand')
         category = request.form.get('category')
-        image_1 = photos.save(request.files.form.get('image_1'), name=secrets.token_hex(10) + ".")
-        image_2 = photos.save(request.files.form.get('image_2'), name=secrets.token_hex(10) + ".")
-        image_3 = photos.save(request.files.form.get('image_3'), name=secrets.token_hex(10) + ".")
+        image_1 = photos.save(request.files.get('image_1'), name=secrets.token_hex(10) + ".")
+        image_2 = photos.save(request.files.get('image_2'), name=secrets.token_hex(10) + ".")
+        image_3 = photos.save(request.files.get('image_3'), name=secrets.token_hex(10) + ".")
         product = NewProduct(name=name,price=price,discount=discount,stock=stock,colors=colors,
                              desc=desc,category_id=category,brand_id=brand,image_1=image_1,
                              image_2=image_2,image_3=image_3, user_id=user_id)
@@ -63,20 +59,16 @@ def New_Product():
         return redirect(url_for('New_Product'))
     return render_template('newproduct.html', form=form, title='Add a Product', brands=brands, categories=categories)  # 4
 
+
+
 """
 @app.route("/NewProduct", methods=['GET','POST'])
 def New_Product():
     brands = BrandName.query.all()
     categories = CategoryName.query.all()
     form = NewProduct_forms(request.form)
-    if  request.method=='POST':
-        user_id = current_user.id
-        product = NewProduct(name=form.name.data,
-                             price=form.price.data,
-                             discount=form.discount.data,
-                             stock=form.stock.data,
-                             colors=form.colors.data,
-                             desc=form.desc.data)
+    if  request.method=='POST' and form.validate():
+
  
         brand = request.form.get('brand')
         category = request.form.get('category')
@@ -85,11 +77,26 @@ def New_Product():
         image_2 = photos.save(request.files.get('form.image_2'), name=secrets.token_hex(10) + ".")
         image_3 = photos.save(request.files.get('form.image_3'), name=secrets.token_hex(10) + ".")
 
+
+        user_id = current_user.id
+        product = NewProduct(name=form.name.data,
+                             price=form.price.data,
+                             discount=form.discount.data,
+                             stock=form.stock.data,
+                             colors=form.colors.data,
+                             desc=form.desc.data,
+                             image_1=image_1,
+                             image_2=image_2,
+                             image_3=image_3,
+                             brand=brand,
+                             category=category,
+                             user_id=user_id)
+
         db.session.add(product)
-        flash(f'The product {name} was added in database','success')
+        flash(f'The product {form.name.data} is successfuly added')
         db.session.commit()
         return redirect(url_for('New_Product'))
-    return render_template('newproduct.html', form=form, title='Add a Product', brands=brands,categories=categories)
+    return render_template('newproduct.html', form=form, title='Add a Product', brands=brands, categories=categories)
 """
 
 

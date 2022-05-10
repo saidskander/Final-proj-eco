@@ -2,7 +2,7 @@
 {% block content %}
 
 <main>
-
+  <div class="alert-container">
 <!--flash msg-->
 <div class="alert-container brand-info">
 {% with messages = get_flashed_messages() %}
@@ -18,10 +18,11 @@
 <!--end flash msg-->
 
 
-                <form method="POST" enctype="multipart/form-data" action="New_Product">
-           
+                <form method="POST" enctype="multipart/form-data" action="">
+                  {{ form.hidden_tag() }}
+                  {{ form.csrf_token }}
                 <div>
-                   <h3>Product Name</h3>
+                   <p>Product Name</p>
                    {{ form.name(class="") }}
                    {% if form.name.errors %}
                    <div>
@@ -34,7 +35,7 @@
                    {% endif %} 
 
 
-                   <h3>Prouct Price</h3>
+                   <p>Prouct Price</p>
                    {{ form.price(class="") }}
                    {% if form.price.errors %}
                    <div>
@@ -47,7 +48,7 @@
                    {% endif %}
                    
 
-                   <h3>Product Discount</h3>
+                   <p>Product Discount</p>
                    {{ form.discount(class="") }}
                    {% if form.discount.errors %}
                    <div>
@@ -62,7 +63,7 @@
 
 
 
-                   <h3>Product Stock</h3>
+                   <p>Product Stock</p>
                    {{ form.stock(class="") }}
                    {% if form.stock.errors %}
                    <div>
@@ -76,7 +77,7 @@
 
 
 
-                   <h3>Product colors</h3>
+                   <p>Product colors</p>
                    {{ form.colors }}
                    {% if form.colors.errors %}
                    <div>
@@ -89,7 +90,7 @@
                    {% endif %} 
 
 
-                   <h3>Product desc</h3>
+                   <p>Product desc</p>
                    {{ form.desc(class="") }}
                    {% if form.desc.errors %}
                    <div>
@@ -107,12 +108,12 @@
                         {% if getproduct %}
                         <option value="{{getproduct.brand_id}}" style="display: none;">{{getproduct.brand.name}}</option>
                         {% for brand in brands %}
-                        <option value="{{brand.id}}">{{brand.form.name}}</option>
+                        <option value="{{brand.id}}">{{brand.name}}</option>
                         {% endfor %}
                        {% else %}
                      <option value=""> Select A brand</option>
                      {% for brand in brands %}
-                     <option value="{{brand.id}}">{{brand.form.name}}</option>
+                     <option value="{{brand.id}}">{{brand.name}}</option>
                      {% endfor %}
                      {% endif %}
                     </select>
@@ -138,23 +139,23 @@
                         {% if getproduct %}
 
                         <div>
-                            <input type="file" name="image_1" id="form.image_1">
+                            <input type="file" name="image_1" id="image_1">
                             <a href="{{url_for('static',filename='images/' + getproduct.image_1)}}"> images/{{ getproduct.image_1}}</a>
                         </div>
 
                         <div> 
-                            <input type="file" name="image_2" id="form.image_2"> 
+                            <input type="file" name="image_2" id="image_2"> 
                             <a href="{{url_for('static',filename='images/' + getproduct.image_2)}}">images/{{ getproduct.image_2}}</a>
                         </div>
                         
                         <div>
-                            <input type="file" name="image_3" id="form.image_3"> 
+                            <input type="file" name="image_3" id="image_3"> 
                             <a href="{{url_for('static',filename='images/' + getproduct.image_3)}}"> image/{{ getproduct.image_3}}</a>
                         </div>
                       
                         {% else %}
 
-                   <h3>Prouct image_1</h3>
+                   <p>Prouct image_1</p>
                    {{ form.image_1(class="") }}
                    {% if form.image_1.errors %}
                    <div>
@@ -162,12 +163,10 @@
                    <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
-                   {% else %}
-                   {{ image_1 }}
                    {% endif %}
 
 
-                   <h3>Prouct image_2</h3>
+                   <p>Prouct image_2</p>
                    {{ form.image_2(class="") }}
                    {% if form.image_2.errors %}
                    <div>
@@ -175,12 +174,10 @@
                    <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
-                   {% else %}
-                   {{ image_2 }}
                    {% endif %}
 
 
-                   <h3>Prouct image_3</h3>
+                   <p>Prouct image_3</p>
                    {{ form.image_3(class="") }}
                    {% if form.image_3.errors %}
                    <div>
@@ -188,15 +185,15 @@
                    <span class="alert-red">{{ error }}<span>
                    {% endfor %}
                    </div>
-                   {% else %}
-                   {{ image_3 }}
+
                    {% endif %}
 
 
                         {% endif %}
                     </div>
                 </div>
-                {{ form.submit(type="submit", value="add new product", class="addnewproductinput") }}
+                {{ form.submit(type="submit", value="ADD PRODUCT") }}
                 </form>
-        </main>
+</div>
+              </main>
 {% endblock content %}
