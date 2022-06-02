@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), unique=False, nullable=False, default="default.png")  # 3
     password = db.Column(db.String(60), unique=False, nullable=False)
 
-    newproducts = db.relationship('NewProduct', backref='user', lazy="joined")
+    newproducts = db.relationship('NewProduct', backref='user', lazy=True)
     brandnames = db.relationship('BrandName', backref='user', lazy=True)
     categorynames = db.relationship('CategoryName', backref='user', lazy=True)
 

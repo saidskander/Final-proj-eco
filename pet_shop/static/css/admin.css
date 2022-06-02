@@ -539,6 +539,23 @@ tr:nth-child(even) {
     text-decoration: none;
 }
 
+.productname{
+  color: black;
+  transition: 2s;
+  transition-timing-function: ease;
+  cursor: pointer;
+}
+
+.productname:hover{
+  background-color: #006bff7d;
+}
+
+.productname a{
+    color: black;
+    list-style: none;
+    text-decoration: none;
+}
+
 /**/
 
 

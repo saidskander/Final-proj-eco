@@ -1,0 +1,182 @@
+{% extends 'CustomerP/layouat.html' %}
+  {% block shop %}
+
+  <!-- category and brands -->
+  <section class="section products">
+    <div class="products-layout container">
+
+    <div class="col-1-of-4">
+      <div class="brand-categ">
+        <div>
+          <div class="block-title">
+            <h3>Category</h3>
+          </div>
+          {% for category in categories %}
+          <ul class="block-content">
+            <li>
+              <input type="checkbox" name="vfgcfg">
+              <label>
+                {{category.name}}
+                <small>(3)</small>
+              </label>
+            </li>
+          </ul>
+          {% endfor %}
+        </div>
+
+
+        <div>
+          <div class="block-title">
+            <h3>Brands</h3>
+          </div>
+          {% for brand in brands %}
+          <ul class="block-content">
+            <li>
+              <input type="checkbox" name="hvbv">
+              <label>
+                {{brand.name}}
+                <small>(3)</small>
+              </label>
+            </li>
+          </ul>
+          {% endfor%}
+        </div>
+       </div>
+      </div>
+
+
+
+ <!-- sort_by-->
+      <div class="col-3-of-4">
+        <form>
+          <div class="item">
+            <label for="sort-by">Sort By</label>
+            <select id="sort-by">
+              <option value="title" selected="selected">Name</option>
+              <option value="number">Price</option>
+              <option value="search_api_relevance">Relevance</option>
+              <option value="created">Newness</option>
+            </select>
+          </div>
+          <div class="item">
+            <label for="order-by">Order</label>
+            <select name="order-by" id="order-by">
+              <option value="ASC" selected="selected">ASC</option>
+              <option value="DESC">DESC</option>
+            </select>
+          </div>
+          <a href="">Apply</a>
+        </form>
+
+
+
+
+
+
+
+
+
+ <!-- products -->
+        <div class="product-layout">
+
+          {% for product in products %}
+          <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+
+          <div class="product">
+            <div class="img-container">
+              {% if product.discount > 0 %}
+              <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+              <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
+            </div>
+            {% endif %}
+
+              <div class="addCart">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+            </div>
+            <div class="bottom">
+              <a href="">{{product.name}}</a>
+              <div class="price">
+                <span>TND {{product.price | numberFormat}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+
+          <div class="product">
+            <div class="img-container">
+              <img src="{{url_for('static', filename='images/product6.jpg')}}" alt="vncn" />
+              <div class="addCart">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+
+            </div>
+            <div class="bottom">
+              <a href="">Bambi Print Mini Backpack</a>
+              <div class="price">
+                <span>TND 150</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="product">
+            <div class="img-container">
+              <img src="{{url_for('static', filename='images/product2.jpg')}}" alt="xxgfg" />
+              <div class="addCart">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+
+
+            </div>
+            <div class="bottom">
+              <a href="">Bambi Print Mini Backpack</a>
+              <div class="price">
+                <span>TND 150</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <div class="img-container">
+              <img src="{{url_for('static', filename='images/product4.jpg')}}" alt="ccghdhgf" />
+              <div class="addCart">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+
+
+            </div>
+            <div class="bottom">
+              <a href="">Bambi Print Mini Backpack</a>
+              <div class="price">
+                <span>TND 150</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <div class="img-container">
+              <img src="{{url_for('static', filename='images/product7.jpg')}}" alt="cvbncvnn" />
+              <div class="addCart">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+
+
+            </div>
+            <div class="bottom">
+              <a href="">Bambi Print Mini Backpack</a>
+              <div class="price">
+                <span>TND 150</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+ </div>
+
+
+
+</section>
+
+  {% endblock shop %}

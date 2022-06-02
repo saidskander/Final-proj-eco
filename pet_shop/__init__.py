@@ -37,6 +37,7 @@ app.config['UPLOADED_PHOTOS_DEST'] = os.path.join(basedir, 'static/images/produc
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)
+#app.config['UPLOADED_PHOTOS_ALLOW'] = set(['png', 'jpg', 'jpeg'])
 
 
 """Login Managers"""

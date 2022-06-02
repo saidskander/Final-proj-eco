@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from crypt import methods
 import os
 from flask import render_template, redirect, url_for  # 1
 from flask import request, session  # 1
@@ -9,6 +10,7 @@ from flask import flash  # 2
 from .forms import RegistrationForm, ResetPasswordForm, RequestResetForm
 from .forms import LoginForm
 from .models import CustomerUser  # 3
+from pet_shop.products.models import NewProduct, BrandName, CategoryName
 from flask_login import login_user, current_user
 from flask_mail import Message
 
@@ -23,19 +25,27 @@ def logout():
     return redirect(url_for('CustomerLanding'))
 """
 
-@app.route('/')
+@app.route('/home', methods=["GET", "POST"])
+def CustomerP():
+    brands = BrandName.query.all()
+    categories = CategoryName.query.all()
+    CustomerProduct = NewProduct
+    products = CustomerProduct.query.filter(CustomerProduct.stock > 0)
+    return render_template("CustomerP/CustomerProduct.html", title="Welcom", products=products, brands=brands, categories=categories)
+
+
+
 @app.route('/CustomerLanding', methods=['GET', 'POST'])
 def CustomerLanding():
     """simple return string"""
-    return"Welcom to my new pet store"
     return render_template("CustomerLanding.html", title="Welcom")
 
 
 @app.route('/CustomerLogin', methods=['GET', 'POST'])
 def CustomerLogin():
     """login"""
-    if current_user.is_authenticated:
-        return redirect(url_for('CustomerLanding'))
+    #if current_user.is_authenticated:
+        #return redirect(url_for('CustomerLanding'))
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         user = CustomerUser.query.filter_by(email = form.email.data).first()  # 4
@@ -51,8 +61,8 @@ def CustomerLogin():
 @app.route('/CustomerRegister', methods=['GET', 'POST'])
 def CustomerRegister():
     """registration forms"""
-    if current_user.is_authenticated:
-        return redirect(url_for('CustomerLanding'))
+    #if current_user.is_authenticated:
+        #return redirect(url_for('CustomerLanding'))
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate_on_submit():
         hash_password = bcrypt.generate_password_hash(form.

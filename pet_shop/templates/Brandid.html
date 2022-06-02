@@ -1,4 +1,3 @@
-
 {% extends 'layout.html' %}
   {% block content %}
         <main>
@@ -23,18 +22,21 @@
 
     <thead>
     <tr>
-    <th>DateTime</th>
+    <th>Sr</th>  
     <th>Name</th>
+    <th>DateTime</th>
+
     <th>Edit</th>
     <th>Delete</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>{{ brand.pub_date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ brand.id - brand.id + 1 }}</td>
     <td class="brandname"><a href="{{url_for('brand', brand_id=brand.id)}}">{{brand.name}}</a></td>
+    <td>{{ brand.pub_date.strftime('%Y-%m-%d') }}</td>
     <td>
-     <a href="{{url_for('Update_Brand', brand_id=brand.id) }}" class="edit-buttons">Edit</a>
+     <a href="{{url_for('Update_Brand', brand_id=brand.id) }}" class="edit-buttons"><button class="edit-buttons">Edit</button></a>
     </td>
     <td>
       <button class="dialog-buttons" onclick="document.getElementById('id01').style.display='block'" type="button">Delete</button>
@@ -58,6 +60,10 @@
                 </div>
               </form>
             </div>
+
+
+
+
 
             <script>
 // Get the modal

@@ -9,9 +9,9 @@ class NewProduct(db.Model):
     __tablename__ = 'newproduct'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    image_1 = db.Column(db.String(150), nullable=False, default='image.jpg')
-    image_2 = db.Column(db.String(150), nullable=False, default='image.jpg')
-    image_3 = db.Column(db.String(150), nullable=False, default='image.jpg')
+    image_1 = db.Column(db.String(150), nullable=False, default='default.png')
+    image_2 = db.Column(db.String(150), nullable=False, default='default.png')
+    image_3 = db.Column(db.String(150), nullable=False, default='default.png')
     price = db.Column(db.Numeric(precision=8, asdecimal=False, decimal_return_scale=None), nullable=False)
     #price = db.Column(db.Numeric(10.2), nullable=False)
     discount = db.Column(db.Integer, default=0)
@@ -31,7 +31,7 @@ class NewProduct(db.Model):
 
     def __repr__(self):
         # return '<NewProduct %r>' % self.name
-        return f"NewProduct('{self.name}', '{self.image_1}', '{self.price}', '{self.discount}', '{self.stock}', '{self.colors}', '{self.pub_date}', '{self.brand_id}')"
+        return f"NewProduct('{self.name}', '{self.image_1}', '{self.price}', '{self.discount}','{self.stock}', '{self.colors}', '{self.pub_date}', '{self.brand_id}', '{self.brand}', '{self.category}')"
 
 
 class BrandName(db.Model):

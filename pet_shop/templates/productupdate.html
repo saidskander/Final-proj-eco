@@ -103,56 +103,57 @@
                    {% endif %} 
 
                   </br>
-
                   <label for="brand">Select a brand</label>
-                  <select name="brand" id="brand" required>
-                      {% if getproduct %}
-                      <option value="{{getproduct.brand_id}}">{{getproduct.brand.name}}</option>
+                  <select name="brand" required>
+                      {% if product %}
+                      <option value="{{product.brand_id}}">{{product.brand.name}}</option>
                       {% for brand in brands %}
                       <option value="{{brand.id}}">{{brand.name}}</option>
                       {% endfor %}
                      {% else %}
-                   <option value=""> --- </option>
+                   <option> --- </option>
                    {% for brand in brands %}
                    <option value="{{brand.id}}">{{brand.name}}</option>
                    {% endfor %}
                    {% endif %}
                   </select>
 
-                </br>
+                  </br>
 
-                  <label for="category">Select a category</label>
-                  <select name="category" id="category" class="" required>
-                  {% if getproduct %}
-                    <option value="{{getproduct.category_id}}">{{getproduct.category.name}}</option>
-                    {% for category in categories %}
-                    <option value="{{category.id}}">{{category.name}}</option>
-                    {% endfor %}
-                   {% else %}
-                   <option value=""> --- </option>
-                   {% for category in categories %}
-                   <option value="{{category.id}}">{{category.name}}</option>
-                   {% endfor %}
-                   {% endif %}
-                  </select>
+
+                    <label for="category">Select category</label>
+                    <select name="category" required>
+                    {% if product %}
+                      <option value="{{product.category_id}}">{{product.category.name}}</option>
+                      {% for category in categories %}
+                      <option value="{{category.id}}">{{category.name}}</option>
+                      {% endfor %}
+                     {% else %}
+                     <option> ---  </option>
+                     {% for category in categories %}
+                     <option value="{{category.id}}">{{category.name}}</option>
+                     {% endfor %}
+                     {% endif %}
+                    </select>
+
 
 
                     <div class="row">
-          
                         {% if product %}
+
                         <div>
                             <input type="file" name="image_1" value="{{product.image_1}}">
-                            <a href="{{url_for('static', filename='images/product_img/' + product.image_1)}}">image_1{{product.image_1}}</a>
+                            <a href="{{url_for('static', filename='images/product_img/' + product.image_1)}}"> images/{{product.image_1}}</a>
                         </div>
 
                         <div> 
                             <input type="file" name="image_2" value="{{product.image_2}}"> 
-                            <a href="{{url_for('static', filename='images/product_img/' + product.image_2)}}">image_2{{product.image_2}}</a>
+                            <a href="{{url_for('static', filename='images/product_img/' + product.image_2)}}">images/{{product.image_2}}</a>
                         </div>
                         
                         <div>
                             <input type="file" name="image_3" value="{{product.image_3}}"> 
-                            <a href="{{url_for('static', filename='images/product_img/' + product.image_3)}}">image_3{{product.image_3}}</a>
+                            <a href="{{url_for('static', filename='images/product_img/' + product.image_3)}}"> images/{{product.image_3}}</a>
                         </div>
                         
                         {% else %}
@@ -188,10 +189,8 @@
                    </div>
                    {% endif %}
 
-
                    {% endif %}
-             
-                  </div>
+                    </div>
                 </div>
                 {{ form.submit(type="submit", value="ADD PRODUCT") }}
                 </form>
@@ -199,3 +198,4 @@
 </div>
               </main>
 {% endblock content %}
+

@@ -25,16 +25,16 @@ class NewProduct_forms(FlaskForm):
     colors = StringField('', [validators.DataRequired("maximum letters 10"), validators.Length(max=10)])
     desc = TextAreaField('', [validators.DataRequired("maximum letters 160"), validators.Length(max=160)])
 
-    image_1 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
-    image_2 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
-    image_3 = FileField('', validators=[FileAllowed(['jpg','png','jpeg'])])
+    image_1 = FileField(validators=[FileAllowed(['jpg','png','jpeg'])])
+    image_2 = FileField(validators=[FileAllowed(['jpg','png','jpeg'])])
+    image_3 = FileField(validators=[FileAllowed(['jpg','png','jpeg'])])
 
     submit = SubmitField("")
 
 
 class Brand_Forms(FlaskForm):
     """empty string in this StringField, used my own on html"""
-    name = StringField('', [validators.DataRequired(), validators.Length(min=3, max=12)])
+    name = StringField('', [validators.DataRequired(""), validators.Length(max=12)])
     submit = SubmitField("")
     def validate_name(self, field):  # 4
         brand = BrandName.query.filter_by(name=field.data).first()
@@ -44,7 +44,7 @@ class Brand_Forms(FlaskForm):
 
 class Category_Forms(FlaskForm):  # 4
     """empty string in this StringField, used my own on html"""
-    name = StringField('', [validators.DataRequired(), validators.Length(min=3, max=12)])
+    name = StringField('', [validators.DataRequired(), validators.Length(max=12)])
     submit = SubmitField("")
     """
        Big note..!!! validate_name was not working

@@ -1,0 +1,409 @@
+:root {
+    --primary: #3dcdaa;
+    --white: #fff;
+    --black: #222;
+    --grey1: #3a3b3c;
+    --grey2: #828282;
+    --darkblue: #24434a;
+  }
+  
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+  
+  html {
+    /* this will adjust the products boxes */
+    box-sizing: border-box;
+    font-size: 62.5%;
+  }
+  /* iwll comment container incase i want it little more bigger (product width)***********/
+  .container {
+    max-width: 114rem;
+    margin: 0 auto;
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .container {
+      padding: 0 3rem;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .container {
+      max-width: 60rem;
+    }
+  }
+  /*********************************/
+  
+  /* brand and category */
+  .col-1-of-4 .brand-categ{
+    margin: 71px 0;
+  }
+  
+  
+  
+  
+  /* PRODUCTS */
+  
+  
+  
+  
+  
+  
+  .col-1-of-4 label{
+    font-weight: inherit;
+    font-size: 1.5rem;
+  }
+  
+  .section .product-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 3rem;
+    max-width: 130rem;
+    margin: 0 auto;
+    padding: 0 1.6rem;
+  }
+  
+  .product {
+  
+  border-radius: 10px;
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 10%);
+  transition: all 300ms ease-in-out;
+    overflow: hidden;
+  }
+  
+  .product:hover{
+  
+    border: 1px solid #3dcdaa;
+  }
+
+  .product:hover .ruban{
+    --d: 11.3px;
+  }
+  
+  .product .img-container {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .product .img-container img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .product .bottom {
+    padding: 1rem;
+    text-align: center;
+        padding: 21px 0 21px 0;
+  }
+  
+  .product .bottom a {
+    margin-bottom: 1rem;
+    font-weight: inherit;
+    font-size: 1.5rem;
+    color: var(--darkblue);
+  }
+  
+  .product .bottom a:hover {
+    color: var(--primary);
+  }
+  
+  .product .bottom span {
+    color: var(--primary);
+    font-size: 1.8rem;
+  }
+  
+  .product .bottom .cancel {
+    font-size: 1.4rem;
+    color: var(--grey2);
+    text-decoration: line-through;
+  }
+  
+  /*shake addCart*/
+  
+  
+  
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+  
+  .product .addCart {
+    position: absolute;
+    right: 0;
+    /*margin to fix the addCart possition */
+    bottom: 100%;
+    /*margin to fix the addCart possition device width*/
+    margin: -37px 0;
+    background-color: var(--white);
+    border-radius:5%;
+    padding: 1.3rem 1.6rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease-in-out;
+  
+  }
+  .product .price{
+  padding: 9px 0;
+  }
+  
+  .product:hover .addCart {
+    border-radius: 0 0.9rem 0 0.9rem;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+    /*background-color: var(--primary);*/
+    color: var(--white);
+    background: rgb(242,242,242);
+    background: linear-gradient(135deg, rgba(242,242,242,1) 0%, rgba(91,195,222,1) 0%, rgba(61,205,170,1) 100%);}
+  
+  
+  .product i {
+    transition: all 200ms ease-in-out;
+  }
+  
+  
+  
+  @media only screen and (max-width: 996px) {
+    .prodouct-layout {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .prodouct-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media only screen and (max-width: 567px) {
+    .prodouct-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media screen and (max-width: 353px) {
+  .addCartimg{
+      height: 25px !important;
+      width: 25px !important;
+      margin: 7px 0 !important;
+     }
+  }
+  
+  .products {
+    margin-top: 10rem;
+  }
+  
+  .products-layout {
+    display: grid;
+    grid-template-columns: 1.05fr 3fr;
+    gap: 0 1rem;
+  }
+  
+  .col-3-of-4 .product-layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .col-3-of-4 {
+    text-align: center;
+  }
+  
+  @media only screen and (max-width: 996px) {
+    .col-3-of-4 .product-layout {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .col-3-of-4 form {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-bottom: 3rem;
+  }
+  
+  .col-3-of-4 form .item {
+    margin-right: 1rem;
+  }
+  
+  .col-3-of-4 form label {
+    color: var(--grey1);
+  }
+  
+  .col-3-of-4 form select {
+    font-family: "Open Sans", sans-serif;
+    padding: 1rem;
+    width: 10rem;
+    border: 1px solid #f2f2f2;
+    outline: none;
+    box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 5%);
+  transition: all 300ms ease-in-out;
+  }
+  
+  .col-3-of-4 form a {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border-radius: 4rem;
+    margin-right: 1rem;
+    background-color: var(--primary);
+    color: var(--white);
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 5%);
+  transition: all 300ms ease-in-out;
+  }
+  
+  .col-3-of-4 form a:hover {
+    background-color: var(--black);
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .products-layout {
+      padding: 0 5rem;
+    }
+  
+    .col-3-of-4 form {
+      flex-direction: column;
+      align-items: end;
+    }
+  
+    .col-3-of-4 form a {
+      margin-right: 0;
+    }
+  
+    .col-3-of-4 form .item {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+  
+  @media only screen and (max-width: 567px) {
+    .col-3-of-4 .product-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .col-1-of-4 .block-title {
+    color: var(--grey1);
+    margin-bottom: 1.6rem;
+  }
+  
+  .col-1-of-4 h3 {
+    font-size: 2.7rem;
+    font-weight: inherit;
+  }
+  
+  .col-1-of-4 div {
+    margin-bottom: 8rem;
+  }
+  
+  .block-content li {
+    margin-bottom: 1rem;
+  }
+  
+  .block-content li label {
+    color: var(--grey2);
+    margin-left: 1rem;
+  }
+  
+  .block-content li label small {
+    font-size: 1rem;
+  }
+  
+  .block-content li input {
+    outline: none;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem 0;
+  }
+  
+  .pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    color: var(--black);
+    font-size: 1.3rem;
+    border: 1px solid var(--grey2);
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .pagination span.last {
+    width: 7rem;
+    border-radius: 3rem;
+  }
+  
+  .pagination span:hover {
+    border: 1px solid var(--primary);
+    background-color: var(--primary);
+    color: var(--white);
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .products-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem 0;
+    }
+  }
+  /******************************************************************************/
+  /*RUBAN */
+
+.ruban{
+  --d: 10px;
+  --c: green;
+  --f: 13px;
+    position: relative;
+    display: inline-block;
+}
+.ruban .left:hover{
+  --d: 11.3px;
+  --c: green;
+  --f: 13px;
+}
+
+.ruban::before {
+  content: attr(data-ribbon);
+  position: absolute;
+  font-size: var(--f);
+  top: 0;
+  right: 0;
+  transform: translate(29.29%, -100%) rotate(45deg);
+  color: #fff;
+  text-align: center;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  transform-origin: bottom left;
+  padding: 5px 35px calc(var(--d) + 5px);
+  background: linear-gradient(rgba(0, 0, 0, 0.5) 0 0) bottom/100% var(--d)
+    no-repeat var(--c);
+  background-clip: padding-box;
+  clip-path: polygon(0 0,100% 0,100% 100%,calc(100% - var(--d)) calc(100% - var(--d)),var(--d) calc(100% - var(--d)),0 100%);
+  -webkit-mask: linear-gradient(135deg,transparent calc(50% - var(--d) * 0.707),#fff 0) bottom left,
+    linear-gradient(-135deg, transparent calc(50% - var(--d) * 0.707), #fff 0)bottom right;
+  -webkit-mask-size: 300vmax 300vmax;
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+
+.left::before {
+  left: 0;
+  right: auto;
+  transform: translate(-29.29%, -100%) rotate(-45deg);
+  transform-origin: bottom right;
+}
+
+/*end RUBAN*/
