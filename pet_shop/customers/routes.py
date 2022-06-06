@@ -35,11 +35,14 @@ def CustomerP():
     products = CustomerProduct.query.filter(CustomerProduct.stock > 0).paginate(page=page, per_page=6)
     return render_template("CustomerP/CustomerProduct.html", title="Welcom", products=products, brands=brands, categories=categories)
 
+
 @app.route("/get_brand/<int:id>")
 def Display_brands(id):
-    """get and display brands in shop"""
+    """get brand"""
     CustomerProduct = NewProduct
+    """get and display brands in shop"""
     brand = CustomerProduct.query.filter_by(brand_id=id)
+    """join statement for brands and categories"""
     brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
     categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
     return render_template('CustomerP/CustomerProduct.html', brand=brand, brands=brands, categories=categories, CustomerProduct=CustomerProduct)
