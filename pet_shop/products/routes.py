@@ -14,10 +14,12 @@ import os
 from flask import current_app
 
 
+# this is for testing purpse and future use
 def brands():
     brands = BrandName.query.join(NewProduct, (BrandName.id == NewProduct.brand_id)).all()
     return brands
 
+# this is for testing purpse and future use
 def categories():
     categories = CategoryName.query.join(NewProduct,(CategoryName.id == NewProduct.category_id)).all()
     return categories

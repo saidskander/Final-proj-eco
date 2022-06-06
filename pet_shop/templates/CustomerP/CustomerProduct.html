@@ -1,10 +1,10 @@
 {% extends 'CustomerP/layouat.html' %}
   {% block shop %}
 
-  <!-- category and brands -->
+
   <section class="section products">
     <div class="products-layout container">
-
+        <!-- category and brands -->
     <div class="col-1-of-4">
       <div class="brand-categ">
         <div>
@@ -15,8 +15,7 @@
           <ul class="block-content">
             <li>
               <input type="checkbox" name="vfgcfg">
-              <label>
-                {{category.name}}
+              <label><a href="">{{category.name}}</a>
                 <small>(3)</small>
               </label>
             </li>
@@ -34,7 +33,7 @@
             <li>
               <input type="checkbox" name="hvbv">
               <label>
-                {{brand.name}}
+                <a href="{{url_for('Display_brands', id=brand.id)}}">{{brand.name}}</a>
                 <small>(3)</small>
               </label>
             </li>
@@ -43,11 +42,12 @@
         </div>
        </div>
       </div>
-
+  <!-- end of category and brands -->
 
 
  <!-- sort_by-->
       <div class="col-3-of-4">
+         <!-- sort_by-->
         <form>
           <div class="item">
             <label for="sort-by">Sort By</label>
@@ -67,116 +67,125 @@
           </div>
           <a href="">Apply</a>
         </form>
-
-
-
-
-
-
-
+ <!-- end of sort_by-->
 
 
  <!-- products -->
-        <div class="product-layout">
-
-          {% for product in products %}
-          <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
-
-          <div class="product">
-            <div class="img-container">
-              {% if product.discount > 0 %}
-              <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
-              <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
-            </div>
-            {% endif %}
-
-              <div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-            </div>
-            <div class="bottom">
-              <a href="">{{product.name}}</a>
-              <div class="price">
-                <span>TND {{product.price | numberFormat}} </span>
-              </div>
-            </div>
-          </div>
-        </div>
-          {% endfor %}
-
-          <div class="product">
-            <div class="img-container">
-              <img src="{{url_for('static', filename='images/product6.jpg')}}" alt="vncn" />
-              <div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-
-            </div>
-            <div class="bottom">
-              <a href="">Bambi Print Mini Backpack</a>
-              <div class="price">
-                <span>TND 150</span>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="product">
-            <div class="img-container">
-              <img src="{{url_for('static', filename='images/product2.jpg')}}" alt="xxgfg" />
-              <div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-
-
-            </div>
-            <div class="bottom">
-              <a href="">Bambi Print Mini Backpack</a>
-              <div class="price">
-                <span>TND 150</span>
-              </div>
-            </div>
-          </div>
-          <div class="product">
-            <div class="img-container">
-              <img src="{{url_for('static', filename='images/product4.jpg')}}" alt="ccghdhgf" />
-              <div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-
-
-            </div>
-            <div class="bottom">
-              <a href="">Bambi Print Mini Backpack</a>
-              <div class="price">
-                <span>TND 150</span>
-              </div>
-            </div>
-          </div>
-          <div class="product">
-            <div class="img-container">
-              <img src="{{url_for('static', filename='images/product7.jpg')}}" alt="cvbncvnn" />
-              <div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
-              </div>
-
-
-            </div>
-            <div class="bottom">
-              <a href="">Bambi Print Mini Backpack</a>
-              <div class="price">
-                <span>TND 150</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
+<div class="product-layout">
+<!-- if brand -->
+{% if brand %}
+ <!-- for loop get product by brand  -->
+ {% for b in brand %}
+ <!-- brand product discount -->
+  {% if b.discount > 0 %}
+  <!-- brand product stock -->
+   {% if b.stock > 0 %}
+    <div class="ruban left" data-ribbon="- {{b.discount}}%" style="">
+     <div class="product">
+      <div class="img-container">
+       <div class="ruban left" data-ribbon="- {{b.discount}}%" style="">
+        <img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" />
+       </div>
+       <div class="addCart">
+        <i class="fas fa-shopping-cart"></i>
+       </div>
       </div>
+      <div class="bottom">
+        <a href="">{{b.name}}</a>
+       <div class="price">
+        <span>TND {{b.price | numberFormat}} </span>
+       </div>
+      </div>
+     </div>
+    </div>
+   {% endif %}
+  <!-- brand product stock -->
+  {% else %}
+  <!-- brand product stock -->
+  {% if b.stock > 0 %}
+     <div class="product">
+     <div class="img-container">
+       <img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" />
+       <div class="addCart">
+        <i class="fas fa-shopping-cart"></i>
+       </div>
+      </div>
+      <div class="bottom">
+       <a href="">{{b.name}}</a>
+       <div class="price">
+        <span>TND {{b.price | numberFormat}} </span>
+       </div>
+     </div>
+    </div>
+   {% endif %}
+  <!-- end of brand product stock -->
+   {% endif %}
+  <!-- end of brand product discount -->
+ {% endfor %}
+ <!-- end of for loop get product by brand  -->
+ {% else %}
+ <!-- for loop for getting a product.items list -->
+ {% for product in products.items %}
+   <!-- product discount -->
+   {% if product.discount > 0 %}
+     <!-- product stock -->
+     {% if product.stock > 0 %}
+       <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+        <div class="product">
+         <div class="img-container">
+          <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+            <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
+          </div>
+           <div class="addCart">
+             <i class="fas fa-shopping-cart"></i>
+           </div>
+        </div>
+          <div class="bottom">
+            <a href="">{{product.name}}</a>
+           <div class="price">
+            <span>TND {{product.price | numberFormat}} </span>
+           </div>
+          </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- end product stock -->
+    {% else %}
+      <!-- product stock -->
+      {% if product.stock > 0 %}
+        <div class="product">
+          <div class="img-container">
+            <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
+            <div class="addCart">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+          </div>
+          <div class="bottom">
+            <a href="">{{product.name}}</a>
+            <div class="price">
+              <span>TND {{product.price | numberFormat}} </span>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+    <!-- end of product stock -->
+   {% endif %}
+   <!-- end of product discount -->
+ {% endfor %}
+<!-- end FOR loop for getting a product.items list -->
+{% endif %}
+<!-- END if brand -->
+ </div>
+<!-- END of products DIV TAG-->
+
+ <div>
+  <!--pagination links-->
+  <!--end of pagination links-->
  </div>
 
-
-
+ </div>
+</div>
 </section>
+{% endblock shop %}
 
-  {% endblock shop %}
+  

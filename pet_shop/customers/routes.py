@@ -25,14 +25,33 @@ def logout():
     return redirect(url_for('CustomerLanding'))
 """
 
+@app.route('/')
 @app.route('/home', methods=["GET", "POST"])
 def CustomerP():
-    brands = BrandName.query.all()
-    categories = CategoryName.query.all()
+    page = request.args.get("page", 1, type=int)
     CustomerProduct = NewProduct
-    products = CustomerProduct.query.filter(CustomerProduct.stock > 0)
+    brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
+    categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
+    products = CustomerProduct.query.filter(CustomerProduct.stock > 0).paginate(page=page, per_page=6)
     return render_template("CustomerP/CustomerProduct.html", title="Welcom", products=products, brands=brands, categories=categories)
 
+@app.route("/get_brand/<int:id>")
+def Display_brands(id):
+    """get and display brands in shop"""
+    CustomerProduct = NewProduct
+    brand = CustomerProduct.query.filter_by(brand_id=id)
+    brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
+    categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
+    return render_template('CustomerP/CustomerProduct.html', brand=brand, brands=brands, categories=categories, CustomerProduct=CustomerProduct)
+
+@app.route("/get_categories/<int:category_id>")
+def Display_categories(category_id):
+    """get and display categories in shop"""
+    CustomerProduct = NewProduct
+    category = CustomerProduct.query.filter_by(category_id=category_id)
+    brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
+    categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
+    return render_template('CustomerP/CustomerProduct.html', category=category, brands=brands, categories=categories)
 
 
 @app.route('/CustomerLanding', methods=['GET', 'POST'])

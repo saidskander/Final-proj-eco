@@ -1,0 +1,21 @@
+<ul class="pagination">
+  {% if products.has_prev %}
+  <li><a class="icon" href="{{url_for('CustomerP', page=products.prev_num)}}">&laquo</a></li>
+  {% endif %}
+
+  {% for page_num in products.iter_pages() %}
+  {% if page_num %}
+  {% if products.page == page_num %}
+  <li><a class="icon" href="{{url_for('CustomerP', page=page_num)}}">{{page_num}}</a></li>
+  {% else %}
+  <li><a  class="icon" href="{{url_for('CustomerP', page=page_num)}}">{{page_num}}</a></li>
+  {% endif %}
+  {% else %}
+  <div> &#x2840 &#x2840 </div>
+  {% endif %}
+  {% endfor %}
+
+  {% if products.has_next %}
+  <li><a class="icon" href="{{url_for('CustomerP', page=products.next_num)}}">&raquo</a></li>
+  {% endif %}
+    </ul>

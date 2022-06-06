@@ -19,7 +19,6 @@ def favicon():
     return "", 200
 
 
-@app.route('/')
 @app.route('/AdminHome', methods=['GET', 'POST'])  # 1
 def AdminHome():  # 1
     """simple return string"""
@@ -50,7 +49,7 @@ def AdminLogin():  # 1
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('AdminHome'))
-            flash(f'Welcom {form.email.data}',"success")  # 4
+            flash(f'Welcom {form.email.data}')  # 4
         else:
             flash("wrong password", "danger")
     return render_template("AdminLogin.html", form=form, title="login")  # 1

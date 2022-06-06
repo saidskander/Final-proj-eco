@@ -20,9 +20,9 @@ class NewProduct_forms(FlaskForm):
     name = StringField('', [validators.DataRequired(), validators.Length(min=2, max=15)])
 
     price = IntegerField('', [validators.DataRequired("This field is required, And only numbers allowed")])
-    discount = IntegerField('', [validators.DataRequired("This field is required, And only numbers allowed")])
-    stock = IntegerField('', [validators.DataRequired("This field is required, And only numbers allowed")])
-    colors = StringField('', [validators.DataRequired("maximum letters 10"), validators.Length(max=10)])
+    discount = IntegerField('', [validators.InputRequired("This field is required, And only numbers allowed"), validators.NumberRange(min=0,max=100)])
+    stock = IntegerField('', [validators.InputRequired("This field is required, And only numbers allowed"), validators.NumberRange(min=0,max=100)])
+    colors = StringField('', [validators.DataRequired("maximum letters 50"), validators.Length(max=50)])
     desc = TextAreaField('', [validators.DataRequired("maximum letters 160"), validators.Length(max=160)])
 
     image_1 = FileField(validators=[FileAllowed(['jpg','png','jpeg'])])

@@ -307,7 +307,7 @@
     margin-bottom: 1rem;
   }
   
-  .block-content li label {
+  .block-content li label a{
     color: var(--grey2);
     margin-left: 1rem;
   }
@@ -327,7 +327,7 @@
     margin: 4rem 0;
   }
   
-  .pagination span {
+  .pagination a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -341,12 +341,12 @@
     cursor: pointer;
   }
   
-  .pagination span.last {
+  .pagination a.last {
     width: 7rem;
     border-radius: 3rem;
   }
   
-  .pagination span:hover {
+  .pagination a:hover {
     border: 1px solid var(--primary);
     background-color: var(--primary);
     color: var(--white);
@@ -407,3 +407,10 @@
 }
 
 /*end RUBAN*/
+
+
+
+
+.pagination li .icon.active{
+  background-color: var(--primary);
+ }
