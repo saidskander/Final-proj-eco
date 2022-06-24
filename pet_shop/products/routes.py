@@ -14,22 +14,17 @@ import os
 from flask import current_app
 
 
-# this is for testing purpse and future use
-def brands():
-    brands = BrandName.query.join(NewProduct, (BrandName.id == NewProduct.brand_id)).all()
-    return brands
 
-# this is for testing purpse and future use
-def categories():
-    categories = CategoryName.query.join(NewProduct,(CategoryName.id == NewProduct.category_id)).all()
-    return categories
 
 
 @app.route('/AdminProducts', methods=['GET', 'POST'])
 def AdminProducts():
     products = NewProduct.query.filter_by(user_id=current_user.id)\
         .order_by(NewProduct.pub_date.desc()).all()
-    return render_template('products.html', products=products)
+    products_in_stock = NewProduct.query.filter(NewProduct.stock > 0).count()
+    products_not_in_stock = NewProduct.query.filter(NewProduct.stock < 1).count()
+
+    return render_template('products.html',products_in_stock=products_in_stock, products_not_in_stock=products_not_in_stock, products=products)
 
 
 """https://pythonhosted.org/Flask-Uploads/"""
@@ -99,11 +94,13 @@ def Update_Product(product_id):
     categories = CategoryName.query.all()
     form = NewProduct_forms()
 
-    if product.user != current_user:
-        abort(403)
 
     brand = request.form.get('brands')
     category = request.form.get('categories')
+
+    if product.user != current_user:
+        abort(403)
+
 
     if form.validate_on_submit():
         product.name = form.name.data
@@ -191,16 +188,11 @@ def New_Product():
     categories = CategoryName.query.all()
     form = NewProduct_forms(request.form)
     if  request.method=='POST' and form.validate():
-
-
         brand = request.form.get('brand')
         category = request.form.get('category')
-
         image_1 = photos.save(request.files.get('form.image_1'), name=secrets.token_hex(10) + ".")
         image_2 = photos.save(request.files.get('form.image_2'), name=secrets.token_hex(10) + ".")
         image_3 = photos.save(request.files.get('form.image_3'), name=secrets.token_hex(10) + ".")
-
-
         user_id = current_user.id
         product = NewProduct(name=form.name.data,
                              price=form.price.data,
@@ -214,7 +206,6 @@ def New_Product():
                              brand=brand,
                              category=category,
                              user_id=user_id)
-
         db.session.add(product)
         flash(f'The product {form.name.data} is successfuly added')
         db.session.commit()
@@ -224,6 +215,11 @@ def New_Product():
 
 
 
+
+# this is for testing purpse and future use
+def categories():
+    categories = CategoryName.query.join(NewProduct,(CategoryName.id == NewProduct.category_id)).all()
+    return categories
 
 
 
@@ -301,7 +297,10 @@ def Delete_Category(category_id):
 
     return redirect(url_for("Categories", category_id=category.id))
 
-
+# this is for testing purpse and future use
+def brands():
+    brands = BrandName.query.join(NewProduct, (BrandName.id == NewProduct.brand_id)).all()
+    return brands
 
 @app.route("/brands", methods=['GET','POST'])
 def Brands():
@@ -366,8 +365,3 @@ def Delete_Brand(brand_id):
     else:
         flash(f'warning brand is active in a product! delete the product or edit brand')
     return redirect(url_for("Brands", brand_id=brand.id))
-
-
-
-
-

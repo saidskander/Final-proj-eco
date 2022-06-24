@@ -1,7 +1,5 @@
 {% extends 'CustomerP/layouat.html' %}
   {% block shop %}
-
-
   <section class="section products">
     <div class="products-layout container">
         <!-- category and brands -->
@@ -14,15 +12,14 @@
           {% for category in categories %}
           <ul class="block-content">
             <li>
-              <input type="checkbox" name="vfgcfg">
-              <label><a href="">{{category.name}}</a>
-                <small>(3)</small>
+              <!--<input type="checkbox" name="vfgcfg">-->
+              <label><a href="{{url_for('Display_categories', id=category.id)}}">{{category.name}}</a>
+                <small>({{category["name"]|length}})</small>
               </label>
             </li>
           </ul>
           {% endfor %}
         </div>
-
 
         <div>
           <div class="block-title">
@@ -31,7 +28,7 @@
           {% for brand in brands %}
           <ul class="block-content">
             <li>
-              <input type="checkbox" name="hvbv">
+              <!--<input type="checkbox" name="hvbv">-->
               <label>
                 <a href="{{url_for('Display_brands', id=brand.id)}}">{{brand.name}}</a>
                 <small>(3)</small>
@@ -43,7 +40,6 @@
        </div>
       </div>
   <!-- end of category and brands -->
-
 
  <!-- sort_by-->
       <div class="col-3-of-4">
@@ -75,7 +71,7 @@
 <!-- if brand -->
 {% if brand %}
  <!-- for loop get product by brand  -->
- {% for b in brand %}
+ {% for b in brand.items %}
  <!-- brand product discount -->
   {% if b.discount > 0 %}
   <!-- brand product stock -->
@@ -84,14 +80,36 @@
      <div class="product">
       <div class="img-container">
        <div class="ruban left" data-ribbon="- {{b.discount}}%" style="">
-        <img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" />
+        <a href="{{url_for('Product_detail', id=b.id)}}"><img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" /></a> 
        </div>
        <div class="addCart">
-        <i class="fas fa-shopping-cart"></i>
+        <form action="{{url_for('AddToCarts')}}" method="post">
+          <div>
+            {%  set colors=b.colors.split(",") %}
+            <select name="colors" style="visibility: hidden;">
+              
+              <!--
+              <option value="Select Size" selected disabled>
+                Select Color
+              </option>
+              -->
+              {% for color in colors %}
+              {%  set colors=color.split(":") %}
+              <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+           <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+           <input name="quantity" type="hidden" value="1" min="1" max="{{b.stock}}"/>
+          <input  type="hidden" name="product_id" value="{{b.id}}">
+          <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+        <!-- <a href="" class="addCart">Add To Cart</a>-->
+        </form>
+         <!-- <i class="fas fa-shopping-cart"></i>-->
        </div>
       </div>
       <div class="bottom">
-        <a href="">{{b.name}}</a>
+        <a href="{{url_for('Product_detail', id=b.id)}}">{{b.name}}</a>
        <div class="price">
         <span>TND {{b.price | numberFormat}} </span>
        </div>
@@ -99,19 +117,41 @@
      </div>
     </div>
    {% endif %}
-  <!-- brand product stock -->
+  <!-- end of brand product stock -->
   {% else %}
   <!-- brand product stock -->
   {% if b.stock > 0 %}
      <div class="product">
      <div class="img-container">
-       <img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" />
+      <a href="{{url_for('Product_detail', id=b.id)}}"><img src="{{url_for('static', filename='images/product_img/' + b.image_1)}}" alt="{{b.name}}" /></a>
        <div class="addCart">
-        <i class="fas fa-shopping-cart"></i>
+        <form action="{{url_for('AddToCarts')}}" method="post">
+          <div>
+            {%  set colors=b.colors.split(",") %}
+            <select name="colors" style="visibility: hidden;">
+              
+              <!--
+              <option value="Select Size" selected disabled>
+                Select Color
+              </option>
+              -->
+              {% for color in colors %}
+              {%  set colors=color.split(":") %}
+              <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+           <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+           <input name="quantity" type="hidden" value="1" min="1" max="{{b.stock}}"/>
+          <input  type="hidden" name="product_id" value="{{b.id}}">
+          <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+        <!-- <a href="" class="addCart">Add To Cart</a>-->
+        </form>
+         <!-- <i class="fas fa-shopping-cart"></i>-->
        </div>
       </div>
       <div class="bottom">
-       <a href="">{{b.name}}</a>
+       <a href="{{url_for('Product_detail', id=b.id)}}">{{b.name}}</a>
        <div class="price">
         <span>TND {{b.price | numberFormat}} </span>
        </div>
@@ -122,8 +162,102 @@
    {% endif %}
   <!-- end of brand product discount -->
  {% endfor %}
- <!-- end of for loop get product by brand  -->
+ <!-- else if category -->
+ {% elif category %}
+ <!-- for loop get product by category  -->
+ {% for c in category.items %}
+ <!-- category product discount -->
+ {% if c.discount > 0 %}
+ <!-- category product stock -->
+  {% if c.stock > 0 %}
+   <div class="ruban left" data-ribbon="- {{c.discount}}%" style="">
+    <div class="product">
+     <div class="img-container">
+      <div class="ruban left" data-ribbon="- {{c.discount}}%" style="">
+        <a href="{{url_for('Product_detail', id=c.id)}}"><img src="{{url_for('static', filename='images/product_img/' + c.image_1)}}" alt="{{c.name}}"/></a>
+     </div>
+      <div class="addCart">
+        <form action="{{url_for('AddToCarts')}}" method="post">
+          <div>
+            {%  set colors=c.colors.split(",") %}
+            <select name="colors" style="visibility: hidden;">
+              
+              <!--
+              <option value="Select Size" selected disabled>
+                Select Color
+              </option>
+              -->
+              {% for color in colors %}
+              {%  set colors=color.split(":") %}
+              <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+           <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+           <input name="quantity" type="hidden" value="1" min="1" max="{{c.stock}}"/>
+          <input  type="hidden" name="product_id" value="{{c.id}}">
+          <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+        <!-- <a href="" class="addCart">Add To Cart</a>-->
+        </form>
+         <!-- <i class="fas fa-shopping-cart"></i>-->
+      </div>
+     </div>
+     <div class="bottom">
+       <a href="{{url_for('Product_detail', id=c.id)}}">{{c.name}}</a>
+      <div class="price">
+       <span>TND {{c.price | numberFormat}} </span>
+      </div>
+     </div>
+    </div>
+   </div>
+  {% endif %}
+ <!-- category product stock -->
  {% else %}
+ <!-- category product stock -->
+ {% if c.stock > 0 %}
+    <div class="product">
+    <div class="img-container">
+      <a href="{{url_for('Product_detail', id=c.id)}}"><img src="{{url_for('static', filename='images/product_img/' + c.image_1)}}" alt="{{c.name}}" /></a>
+      <div class="addCart">
+        <form action="{{url_for('AddToCarts')}}" method="post">
+          <div>
+            {%  set colors=c.colors.split(",") %}
+            <select name="colors" style="visibility: hidden;">
+              
+              <!--
+              <option value="Select Size" selected disabled>
+                Select Color
+              </option>
+              -->
+              {% for color in colors %}
+              {%  set colors=color.split(":") %}
+              <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+          </div>
+           <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+           <input name="quantity" type="hidden" value="1" min="1" max="{{c.stock}}"/>
+          <input  type="hidden" name="product_id" value="{{c.id}}">
+          <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+        <!-- <a href="" class="addCart">Add To Cart</a>-->
+        </form>
+         <!-- <i class="fas fa-shopping-cart"></i>-->
+      </div>
+     </div>
+     <div class="bottom">
+      <a href="{{url_for('Product_detail', id=c.id)}}">{{c.name}}</a>
+      <div class="price">
+       <span>TND {{c.price | numberFormat}} </span>
+      </div>
+    </div>
+   </div>
+   {% endif %}
+  <!-- end of category product stock -->
+   {% endif %}
+  <!-- end of category product discount -->
+ {% endfor %}
+ <!-- end of for loop get product by category  -->
+{% else %}
  <!-- for loop for getting a product.items list -->
  {% for product in products.items %}
    <!-- product discount -->
@@ -134,14 +268,36 @@
         <div class="product">
          <div class="img-container">
           <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
-            <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
+            <a href="{{url_for('Product_detail', id=product.id)}}"><img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" /></a>
           </div>
            <div class="addCart">
-             <i class="fas fa-shopping-cart"></i>
+            <form action="{{url_for('AddToCarts')}}" method="post">
+              <div>
+                {%  set colors=product.colors.split(",") %}
+                <select name="colors" style="visibility: hidden;">
+                  
+                  <!--
+                  <option value="Select Size" selected disabled>
+                    Select Color
+                  </option>
+                  -->
+                  {% for color in colors %}
+                  {%  set colors=color.split(":") %}
+                  <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+               <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+               <input name="quantity" type="hidden" value="1" min="1" max="{{product.stock}}"/>
+              <input  type="hidden" name="product_id" value="{{product.id}}">
+              <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+            <!-- <a href="" class="addCart">Add To Cart</a>-->
+            </form>
+             <!-- <i class="fas fa-shopping-cart"></i>-->
            </div>
         </div>
           <div class="bottom">
-            <a href="">{{product.name}}</a>
+            <a href="{{url_for('Product_detail', id=product.id)}}">{{product.name}}</a>
            <div class="price">
             <span>TND {{product.price | numberFormat}} </span>
            </div>
@@ -155,13 +311,35 @@
       {% if product.stock > 0 %}
         <div class="product">
           <div class="img-container">
-            <img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" />
+            <a href="{{url_for('Product_detail', id=product.id)}}"><img src="{{url_for('static', filename='images/product_img/' + product.image_1, product_id=product_id)}}" alt="{{product.name}}" /></a>
             <div class="addCart">
-              <i class="fas fa-shopping-cart"></i>
+              <form action="{{url_for('AddToCarts')}}" method="post">
+                <div>
+                  {%  set colors=product.colors.split(",") %}
+                  <select name="colors" style="visibility: hidden;">
+                    
+                    <!--
+                    <option value="Select Size" selected disabled>
+                      Select Color
+                    </option>
+                    -->
+                    {% for color in colors %}
+                    {%  set colors=color.split(":") %}
+                    <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                 <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+                 <input name="quantity" type="hidden" value="1" min="1" max="{{product.stock}}"/>
+                <input  type="hidden" name="product_id" value="{{product.id}}">
+                <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+              <!-- <a href="" class="addCart">Add To Cart</a>-->
+              </form>
+               <!-- <i class="fas fa-shopping-cart"></i>-->
             </div>
           </div>
           <div class="bottom">
-            <a href="">{{product.name}}</a>
+            <a href="{{url_for('Product_detail', id=product.id)}}">{{product.name}}</a>
             <div class="price">
               <span>TND {{product.price | numberFormat}} </span>
             </div>
@@ -178,11 +356,114 @@
  </div>
 <!-- END of products DIV TAG-->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if products %}
+
  <div>
   <!--pagination links-->
+  <ul class="pagination">
+    {% if products.has_prev %}
+    <li><a class="icon" href="{{url_for('CustomerP', page=products.prev_num)}}">&laquo</a></li>
+    {% endif %}
+    {% if products.total>6 %}
+    {% for page_num in products.iter_pages(left_edge=1, right_edge=2, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if products.page == page_num %}
+    <li><a class="icon" href="{{url_for('CustomerP', page=page_num)}}">{{page_num}}</a></li>
+    {% else %}
+    <li><a  class="icon" href="{{url_for('CustomerP', page=page_num)}}">{{page_num}}</a></li>
+    {% endif %}
+    {% else %}
+    <div> &#x2840 &#x2840 </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if products.has_next %}
+    <li><a class="icon" href="{{url_for('CustomerP', page=products.next_num)}}">&raquo</a></li>
+    {% endif %}
+      </ul>
   <!--end of pagination links-->
  </div>
 
+{% elif category %}
+
+ <div>
+  <!--pagination links-->
+  <ul class="pagination">
+    {% if category.has_prev %}
+    <li><a class="icon" href="{{url_for('Display_categories', id=c.id, page=category.prev_num)}}">&laquo</a></li>
+    {% endif %}
+    {% if category.total>6 %}
+    {% for page_num in category.iter_pages(left_edge=1, right_edge=2, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if category.page == page_num %}
+    <li><a class="icon" href="{{url_for('Display_categories', id=c.id, page=page_num)}}">{{page_num}}</a></li>
+    {% else %}
+    <li><a  class="icon" href="{{url_for('Display_categories', id=c.id, page=page_num)}}">{{page_num}}</a></li>
+    {% endif %}
+    {% else %}
+    <div> &#x2840 &#x2840 </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if category.has_next %}
+    <li><a class="icon" href="{{url_for('Display_categories', id=c.id, page=category.next_num)}}">&raquo</a></li>
+    {% endif %}
+      </ul>
+  <!--end of pagination links-->
+ </div>
+
+
+{% else %}
+
+
+<div>
+  <!--pagination links-->
+  <ul class="pagination">
+    {% if brand.has_prev %}
+    <li><a class="icon" href="{{url_for('Display_brands', id=b.id, page=brand.prev_num)}}">&laquo</a></li>
+    {% endif %}
+    {% if brand.total>6 %}
+    {% for page_num in brand.iter_pages(left_edge=1, right_edge=2, left_current=1, right_current=2) %}
+    {% if page_num %}
+    {% if brand.page == page_num %}
+    <li><a class="icon" href="{{url_for('Display_brands', id=b.id, page=page_num)}}">{{page_num}}</a></li>
+    {% else %}
+    <li><a  class="icon" href="{{url_for('Display_brands', id=b.id, page=page_num)}}">{{page_num}}</a></li>
+    {% endif %}
+    {% else %}
+    <div> &#x2840 &#x2840 </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if brand.has_next %}
+    <li><a class="icon" href="{{url_for('Display_brands', id=b.id, page=brand.next_num)}}">&raquo</a></li>
+    {% endif %}
+      </ul>
+  <!--end of pagination links-->
+ </div>
+
+
+ {% endif %}
+
+
+
+
+ 
  </div>
 </div>
 </section>

@@ -1,0 +1,90 @@
+{% extends 'CustomerP/layouat.html' %}
+  {% block shop %}
+
+{#{ session['AddToCartx'] }#}
+
+    <!-- Items IN THE CARTS -->
+    <div class="container cart">
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Discount</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+          {% for key, product in session["AddToCartx"].items() %}
+          {% set discount = ((product.discount/100) * product.price|float) %}
+          <tr>
+            <td>
+              <div class="cart-info">
+                <img src="{{url_for('static', filename='images/product_img/' + product.img)}}" alt="{{product.name}}" />
+                <div>
+                  <p>{{product.name}}
+                     <span style="color: green;">Status: In stock</span>
+                  </p>
+                  <span>Price: {{product.price | numberFormat}} TND</span>
+                  <br />
+                  <a href="#">remove</a>
+                  <br/>
+                  <span>color: {{product.color}}</span>
+                </div>
+              </div>
+            </td>
+            {% if product.discount >= 1 %}
+            <td><span> - {{product.discount}} % = - {{discount| numberFormat}}</span></td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            <td> <span>Quantity </span> <input type="number" value="{{product.quantity}}" min="1" max="{{product.stock}}"/></td>
+            {% set subtotal = product.quantity|int * product.price|float %}
+            <td>{{( (subtotal - (discount * product.quantity|int)) |numberFormat)}} TND</td>
+            
+          </tr>
+          {% endfor %}
+        </table>
+        <div class="total-price">
+          <table>
+            <tr>
+              <td>Product</td>
+              <td>{{index}}</td>
+            </tr>
+            <tr>
+              <td>Product Quantity</td>
+              <td>{{product_quantity}}</td>
+            </tr>
+
+            <tr>
+              <td>Total</td>
+              <td>TND {{GrandTotal |numberFormat}}</td>
+            </tr>
+          </table>
+          <a href="#" class="checkout btn">Continue To Checkout</a>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {% endblock shop %}

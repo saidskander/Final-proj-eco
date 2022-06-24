@@ -7,11 +7,9 @@
   <title>Admin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{url_for('static', filename='css/Customer.css')}}" type="text/css">
-  <link rel="stylesheet" href="{{url_for('static', filename='css/admn.css')}}" type="text/css">
   <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}"type="text/css">
 
   <script src="jquery-1.7.2.min.js"></script>
-  <script src="script.js"></script>
   <script src="https://kit.fontawesome.com/651bb91b75.js" crossorigin="anonymous"></script>
 
 </head>
@@ -21,7 +19,7 @@
 
   <header>
     <nav class="nav1">
-      <a href="/" class="first-li-logo">Eco/Admin</a>
+      <a href="/" class="first-li-logo">SKANDER</a>
 
       <ul class="first-ul">
 
@@ -40,7 +38,7 @@
           </ul>
           <li  class="first-li">
             <div class="add-cart-box">
-             <a href="#" class="addcart-a-link"><img class="addCartimg" src="{{url_for('static', filename='images/addCart.gif')}}" height="40" width="40" alt=""></a>
+             <a href="{{url_for('ItemCarts')}}" class="addcart-a-link"><img class="addCartimg" src="{{url_for('static', filename='images/addCart.gif')}}" height="40" width="40" alt=""><span>{{session["AddToCartx"]|length}}</span></a>
             </div>
           </li>
 

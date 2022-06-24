@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
 from crypt import methods
+from itertools import product
 import os
+from warnings import catch_warnings
 from flask import render_template, redirect, url_for  # 1
 from flask import request, session  # 1
 from pet_shop import app, db  # 1
 from pet_shop import bcrypt, mail  # 3
-from flask import flash  # 2
+from flask import flash
+
+from pet_shop.products.routes import brand, category  # 2
 from .forms import RegistrationForm, ResetPasswordForm, RequestResetForm
 from .forms import LoginForm
 from .models import CustomerUser  # 3
@@ -35,26 +39,44 @@ def CustomerP():
     products = CustomerProduct.query.filter(CustomerProduct.stock > 0).paginate(page=page, per_page=6)
     return render_template("CustomerP/CustomerProduct.html", title="Welcom", products=products, brands=brands, categories=categories)
 
-
 @app.route("/get_brand/<int:id>")
 def Display_brands(id):
     """get brand"""
+    page = request.args.get("page", 1, type=int)
+    """Model variable"""
     CustomerProduct = NewProduct
-    """get and display brands in shop"""
-    brand = CustomerProduct.query.filter_by(brand_id=id)
+    """query filter by id (this query for pagination url_for)"""
+    b = CategoryName.query.filter_by(id=id).first_or_404()
+    """get and display brands in shop with pagination"""
+    brand = CustomerProduct.query.filter_by(brand=b).paginate(page=page, per_page=6)
     """join statement for brands and categories"""
     brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
     categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
-    return render_template('CustomerP/CustomerProduct.html', brand=brand, brands=brands, categories=categories, CustomerProduct=CustomerProduct)
+    return render_template('CustomerP/CustomerProduct.html', page=page, brand=brand, brands=brands, categories=categories, CustomerProduct=CustomerProduct, b=b)
 
-@app.route("/get_categories/<int:category_id>")
-def Display_categories(category_id):
-    """get and display categories in shop"""
+
+@app.route("/Product_detail/<int:id>")
+def Product_detail(id):
+    """Unique product detail"""
+    category = NewProduct.query.get_or_404(id)
+    brand = NewProduct.query.get_or_404(id)
+    product = NewProduct.query.get_or_404(id)
+    return render_template('CustomerP/product-details.html', product=product, brand=brand, category=category)
+
+
+@app.route("/get_categories/<int:id>")
+def Display_categories(id):
+    page = request.args.get("page", 1, type=int)
+    """get categories"""
     CustomerProduct = NewProduct
-    category = CustomerProduct.query.filter_by(category_id=category_id)
+    """query filter by id (this query for pagination url_for)"""
+    c = CategoryName.query.filter_by(id=id).first_or_404()
+    """get and display categories in shop with pagination"""
+    category = CustomerProduct.query.filter_by(category=c).paginate(page=page, per_page=6)
+    """join statement for brands and categories"""
     brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
     categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
-    return render_template('CustomerP/CustomerProduct.html', category=category, brands=brands, categories=categories)
+    return render_template('CustomerP/CustomerProduct.html', page=page, category=category, brands=brands, categories=categories, c=c)
 
 
 @app.route('/CustomerLanding', methods=['GET', 'POST'])

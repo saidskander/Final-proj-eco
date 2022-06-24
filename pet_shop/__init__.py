@@ -50,12 +50,13 @@ login_manager.init_app(app)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-"""
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
-"""
+
+# app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+# app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
+
 app.config['MAIL_USERNAME'] = 'test2022xyz@gmail.com'
-app.config['MAIL_PASSWORD'] = 'azerty123-'
+app.config['MAIL_PASSWORD'] = 'kabvennepsoiijae'
+# azerty123-
 mail = Mail(app)
 
 
@@ -65,3 +66,4 @@ from pet_shop.admin import routes  # noqa: E402 # 1
 # from pet_shop.AdminDash import routes  # noqa: E402 # 4
 from pet_shop.products import routes  # noqa: E402 # 5
 from pet_shop.customers import routes  # noqa: E402
+from pet_shop.AddCart import cart  # noqa: E402

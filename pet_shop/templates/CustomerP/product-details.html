@@ -1,0 +1,93 @@
+{% extends 'CustomerP/layouat.html' %}
+  {% block shop %}
+  <!-- Product Details -->
+  <section class="section product-detail">
+    <div class="details container">
+      {% if product.discount > 0 %}
+      <div class="left">
+        <div class="ruban left detail-ruban" data-ribbon="- {{product.discount}}%">
+         <div class="main" id="b_image">
+          <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="" />
+         </div>
+        </div>
+        <div class="thumbnails" id="s_image">
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="" />
+          </div>
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_2)}}" alt="" />
+          </div>
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_3)}}" alt="" />
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="left">
+        <div  >
+         <div class="main" id="b_image">
+          <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="" />
+         </div>
+        </div>
+        <div class="thumbnails" id="s_image">
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="" />
+          </div>
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_2)}}" alt="" />
+          </div>
+          <div class="thumbnail img_border">
+            <img class="img_o" src="{{url_for('static', filename='images/product_img/' + product.image_3)}}" alt="" />
+          </div>
+        </div>
+      </div>
+      {% endif %}     
+      <div class="right">
+        <span>Brand:{{product.brand.name}} / category:{{product.category.name}}</span>
+        
+        <h1>{{product.name}}</h1>
+        <div class="price" name="price">TND {{product.price | numberFormat}}</div>
+        <form  class="form" action="{{url_for('AddToCarts')}}" method="post">
+          <div class="color-detail">
+            {%  set colors=product.colors.split(",") %}
+            <select name="colors">
+              
+              <!--
+              <option value="Select Size" selected disabled>
+                Select Color
+              </option>
+              -->
+              {% for color in colors %}
+              {%  set colors=color.split(":") %}
+              <option value="{{colors[0]}}">{{ colors[0]|capitalize }}</option>
+              {% endfor %}
+            </select>
+            <span><i class="fas fa-chevron-down"></i></span>
+          </div>
+           <label for="quantity"> Quantity: </label>
+           <input name="quantity" type="number" value="1" min="1" max="{{product.stock}}"/>
+          <input  type="hidden" name="product_id" value="{{product.id}}">
+          <button type="submit"  class="addCart">Add To Cart</button>
+        <!-- <a href="" class="addCart">Add To Cart</a>-->
+        </form>
+        <h3>Product Detail</h3>
+        <p class="discription">
+          {{product.desc}}
+        </p>
+      </div>
+    
+    </div>
+  </section>
+  <script>
+   var b_image = document.getElementById('b_image');
+   var s_image = document.getElementById('s_image').getElementsByTagName('img')
+    for(var i = 0; i < s_image.length; i++){
+
+        s_image[i].addEventListener('click', full_image);
+    }
+    function full_image(){
+        var ImageSRC = this.getAttribute('src');
+        b_image.innerHTML = "<img src=" + ImageSRC + ">";
+    }
+  </script>
+  {% endblock shop %}
