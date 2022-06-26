@@ -17,7 +17,8 @@
 <body>
 
 
-  <header>
+  {% block header %}
+<header>
     <nav class="nav1">
       <a href="/" class="first-li-logo">SKANDER</a>
 
@@ -48,23 +49,20 @@
          <li class="first-li "><a class="first-a-link" href="#">Logout</a></li>
          <li class="first-li "><a class="first-a-link" href="#">Settings</a></li>
        -->
-
-
-
         <li class="first-li-search">
         <div class="wrapper">
+          <form action="{{url_for('search')}}">
             <button type="submit" class="search-btn"><i class="fa fa-search search-icon"></i></button>
-            <input class="search" placeholder="Search" type="text">
+            <input class="search" name="q" placeholder="Search" type="text">
             <img alt="img" class="clear-icon" src="{{url_for('static', filename='images/close.png')}}" />
+        </form>
           </div>
         </li>
-
-
-
 
       </ul>
     </nav>
   </header>
+  {% endblock header %}
 
 
 

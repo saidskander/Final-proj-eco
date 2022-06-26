@@ -4,6 +4,7 @@ from crypt import methods
 from itertools import product
 import os
 from warnings import catch_warnings
+from attr import fields
 from flask import render_template, redirect, url_for  # 1
 from flask import request, session  # 1
 from pet_shop import app, db  # 1
@@ -28,6 +29,18 @@ def logout():
     logout_user()
     return redirect(url_for('CustomerLanding'))
 """
+
+
+
+
+@app.route('/search')
+def search():
+    CustomerProduct = NewProduct
+    keyword_search = request.args.get('q')
+    products = CustomerProduct.query.msearch(keyword_search, fields=["name", "desc"], limit=10)
+    brands = BrandName.query.msearch(BrandName.id, fields=["name"])
+    return render_template("CustomerP/search.html", products=products, brands=brands)
+
 
 @app.route('/')
 @app.route('/home', methods=["GET", "POST"])

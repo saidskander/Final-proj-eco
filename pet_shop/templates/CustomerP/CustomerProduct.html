@@ -5,6 +5,11 @@
         <!-- category and brands -->
     <div class="col-1-of-4">
       <div class="brand-categ">
+        <h3>Shop by Category</h3>
+        <br>
+        <br>
+        <br>
+        <br>
         <div>
           <div class="block-title">
             <h3>Category</h3>
@@ -14,12 +19,17 @@
             <li>
               <!--<input type="checkbox" name="vfgcfg">-->
               <label><a href="{{url_for('Display_categories', id=category.id)}}">{{category.name}}</a>
-                <small>({{category["name"]|length}})</small>
+                <small></small>
               </label>
             </li>
           </ul>
           {% endfor %}
         </div>
+         <h3>Shop by Brand</h3>
+         <br>
+         <br>
+         <br>
+         <br>
 
         <div>
           <div class="block-title">
@@ -31,7 +41,7 @@
               <!--<input type="checkbox" name="hvbv">-->
               <label>
                 <a href="{{url_for('Display_brands', id=brand.id)}}">{{brand.name}}</a>
-                <small>(3)</small>
+                <small></small>
               </label>
             </li>
           </ul>

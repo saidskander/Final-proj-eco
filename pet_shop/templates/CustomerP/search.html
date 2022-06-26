@@ -1,0 +1,173 @@
+{% extends 'CustomerP/layouat.html' %}
+  {% block shop %}
+  
+  <section class="section products">
+    <div class="products-layout container">
+        <!-- category and brands -->
+    <div class="col-1-of-4">
+      <div class="brand-categ">
+        <div>
+          <div class="block-title">
+            <h3>Category</h3>
+          </div>
+          {% for category in categories %}
+          <ul class="block-content">
+            <li>
+              <!--<input type="checkbox" name="vfgcfg">-->
+              <label><a href="{{url_for('Display_categories', id=category.id)}}">{{category.name}}</a>
+                <small></small>
+              </label>
+            </li>
+          </ul>
+          {% endfor %}
+        </div>
+
+        <div>
+          <div class="block-title">
+            <h3>Brands</h3>
+          </div>
+          {% for brand in brands %}
+          <ul class="block-content">
+            <li>
+              <!--<input type="checkbox" name="hvbv">-->
+              <label>
+                <a href="{{url_for('Display_brands', id=brand.id)}}">{{brand.name}}</a>
+                <small></small>
+              </label>
+            </li>
+          </ul>
+          {% endfor%}
+        </div>
+       </div>
+      </div>
+  <!-- end of category and brands -->
+
+ <!-- sort_by-->
+      <div class="col-3-of-4">
+         <!-- sort_by-->
+        <form>
+          <div class="item">
+            <label for="sort-by">Sort By</label>
+            <select id="sort-by">
+              <option value="title" selected="selected">Name</option>
+              <option value="number">Price</option>
+              <option value="search_api_relevance">Relevance</option>
+              <option value="created">Newness</option>
+            </select>
+          </div>
+          <div class="item">
+            <label for="order-by">Order</label>
+            <select name="order-by" id="order-by">
+              <option value="ASC" selected="selected">ASC</option>
+              <option value="DESC">DESC</option>
+            </select>
+          </div>
+          <a href="">Apply</a>
+        </form>
+ <!-- end of sort_by-->
+
+
+ <!-- products -->
+<div class="product-layout">
+ <!-- for loop for getting a product.items list -->
+ {% for product in products %}
+   <!-- product discount -->
+   {% if product.discount > 0 %}
+     <!-- product stock -->
+     {% if product.stock > 0 %}
+       <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+        <div class="product">
+         <div class="img-container">
+          <div class="ruban left" data-ribbon="- {{product.discount}}%" style="">
+            <a href="{{url_for('Product_detail', id=product.id)}}"><img src="{{url_for('static', filename='images/product_img/' + product.image_1)}}" alt="{{product.name}}" /></a>
+          </div>
+           <div class="addCart">
+            <form action="{{url_for('AddToCarts')}}" method="post">
+              <div>
+                {%  set colors=product.colors.split(",") %}
+                <select name="colors" style="visibility: hidden;">
+                  
+                  <!--
+                  <option value="Select Size" selected disabled>
+                    Select Color
+                  </option>
+                  -->
+                  {% for color in colors %}
+                  {%  set colors=color.split(":") %}
+                  <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+               <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+               <input name="quantity" type="hidden" value="1" min="1" max="{{product.stock}}"/>
+              <input  type="hidden" name="product_id" value="{{product.id}}">
+              <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+            <!-- <a href="" class="addCart">Add To Cart</a>-->
+            </form>
+             <!-- <i class="fas fa-shopping-cart"></i>-->
+           </div>
+        </div>
+          <div class="bottom">
+            <a href="{{url_for('Product_detail', id=product.id)}}">{{product.name}}</a>
+           <div class="price">
+            <span>TND {{product.price | numberFormat}} </span>
+           </div>
+          </div>
+          </div>
+        </div>
+      {% endif %}
+      <!-- end product stock -->
+    {% else %}
+      <!-- product stock -->
+      {% if product.stock > 0 %}
+        <div class="product">
+          <div class="img-container">
+            <a href="{{url_for('Product_detail', id=product.id)}}"><img src="{{url_for('static', filename='images/product_img/' + product.image_1, product_id=product_id)}}" alt="{{product.name}}" /></a>
+            <div class="addCart">
+              <form action="{{url_for('AddToCarts')}}" method="post">
+                <div>
+                  {%  set colors=product.colors.split(",") %}
+                  <select name="colors" style="visibility: hidden;">
+                    
+                    <!--
+                    <option value="Select Size" selected disabled>
+                      Select Color
+                    </option>
+                    -->
+                    {% for color in colors %}
+                    {%  set colors=color.split(":") %}
+                    <option value="{{colors[0]}}" style="visibility: hidden;">{{ colors[0]|capitalize }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                 <label for="quantity" style="visibility: hidden;"> Quantity: </label>
+                 <input name="quantity" type="hidden" value="1" min="1" max="{{product.stock}}"/>
+                <input  type="hidden" name="product_id" value="{{product.id}}">
+                <button type="submit"  class="addCart"><i class="fas fa-shopping-cart"></i></button>
+              <!-- <a href="" class="addCart">Add To Cart</a>-->
+              </form>
+               <!-- <i class="fas fa-shopping-cart"></i>-->
+            </div>
+          </div>
+          <div class="bottom">
+            <a href="{{url_for('Product_detail', id=product.id)}}">{{product.name}}</a>
+            <div class="price">
+              <span>TND {{product.price | numberFormat}} </span>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+    <!-- end of product stock -->
+   {% endif %}
+   <!-- end of product discount -->
+ {% endfor %}
+<!-- end FOR loop for getting a product.items list -->
+ </div>
+<!-- END of products DIV TAG-->
+ 
+ </div>
+</div>
+</section>
+{% endblock shop %}
+
+  

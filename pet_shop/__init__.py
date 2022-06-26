@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 from flask import Flask
+from flask_msearch import Search
 from flask_sqlalchemy import SQLAlchemy
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_bcrypt import Bcrypt
@@ -22,6 +23,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data_shop.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
+"""search"""
+msearch = Search()
+msearch.init_app(app)
 
 '''migrate'''
 migrate = Migrate(app, db)

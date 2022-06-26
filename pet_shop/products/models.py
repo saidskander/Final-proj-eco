@@ -7,6 +7,7 @@ from pet_shop.admin.models import User
 """Numeric"""
 class NewProduct(db.Model):
     __tablename__ = 'newproduct'
+    __searchable__ = ['name', "desc"]
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     image_1 = db.Column(db.String(150), nullable=False, default='default.png')

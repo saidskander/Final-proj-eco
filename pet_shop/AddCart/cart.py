@@ -42,7 +42,7 @@ def AddToCarts():
 
         product = CustomerProduct.query.filter_by(id=product_id).first()
         if product_id and quantity and colors and request.method == "POST":
-            DictionaryItems = {product_id:{"name": product.name, "price": product.price, "discount": product.discount, "color":colors, "img":product.image_1, "quantity": quantity}}
+            DictionaryItems = {product_id:{"name": product.name, "price": product.price,"colors": product.colors, "discount": product.discount, "color":colors, "img":product.image_1, "quantity": quantity}}
             if "AddToCartx" in session:
                 print(session["AddToCartx"])
                 if product_id in session["AddToCartx"]:

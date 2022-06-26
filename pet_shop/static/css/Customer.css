@@ -419,7 +419,7 @@ hr {
   display: inline-block;
 }
 
-header .nav1 .first-ul .first-li-search .wrapper {
+header .nav1 .first-ul .first-li-search .wrapper form {
   position: relative;
   display: flex;
   max-width: 86%;
@@ -501,11 +501,11 @@ input[type='search'] {
 
 @media screen and (max-width: 353px) {
 
-  .wrapper {
-      position: absolute;
-      min-width: 107.7% !important;
-      margin: 20px -15px !important;
-    }
+.wrapper form{
+    position: absolute;
+    min-width: 92.7% !important;
+    margin: 50px 5px !important;
+}
 
     .clear-icon {
       margin: 5px 0 !important;
