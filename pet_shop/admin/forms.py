@@ -25,7 +25,7 @@ class RegistrationForm(FlaskForm):  # 2
     username = StringField('', [validators.Length(min=4, max=25)])  # 2
 
     """empty string in this StringField, used my own on html"""
-    email = StringField('', [validators.Length(min=6, max=35),
+    email = StringField('', [validators.Length(min=4, max=22),
                                           validators.Email()])  # 2
 
     """empty string in this PasswordField, used my own in html"""
