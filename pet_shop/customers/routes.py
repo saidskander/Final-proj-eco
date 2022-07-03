@@ -37,7 +37,7 @@ def logout():
 def search():
     CustomerProduct = NewProduct
     keyword_search = request.args.get('q')
-    products = CustomerProduct.query.msearch(keyword_search, fields=["name", "desc"], limit=10)
+    products = CustomerProduct.query.msearch(keyword_search, fields=["name", "desc"], limit=1)
     brands = BrandName.query.msearch(BrandName.id, fields=["name"])
     return render_template("CustomerP/search.html", products=products, brands=brands)
 
@@ -50,7 +50,10 @@ def CustomerP():
     brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
     categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
     products = CustomerProduct.query.filter(CustomerProduct.stock > 0).paginate(page=page, per_page=6)
-    return render_template("CustomerP/CustomerProduct.html", title="Welcom", products=products, brands=brands, categories=categories)
+    return render_template("CustomerP/CustomerProduct.html", title="Welcom",
+                           products=products, brands=brands,
+                           categories=categories)
+
 
 @app.route("/get_brand/<int:id>")
 def Display_brands(id):
@@ -58,14 +61,15 @@ def Display_brands(id):
     page = request.args.get("page", 1, type=int)
     """Model variable"""
     CustomerProduct = NewProduct
-    """query filter by id (this query for pagination url_for)"""
-    b = CategoryName.query.filter_by(id=id).first_or_404()
+    """query filter by id (this query for pagination)"""
+    b = BrandName.query.filter_by(id=id).first_or_404()
     """get and display brands in shop with pagination"""
     brand = CustomerProduct.query.filter_by(brand=b).paginate(page=page, per_page=6)
     """join statement for brands and categories"""
     brands = BrandName.query.join(CustomerProduct, (BrandName.id == CustomerProduct.brand_id)).all()
     categories = CategoryName.query.join(CustomerProduct, (CategoryName.id == CustomerProduct.category_id)).all()
-    return render_template('CustomerP/CustomerProduct.html', page=page, brand=brand, brands=brands, categories=categories, CustomerProduct=CustomerProduct, b=b)
+    return render_template('CustomerP/CustomerProduct.html', page=page, brand=brand, brands=brands,
+                           categories=categories, CustomerProduct=CustomerProduct, b=b)
 
 
 @app.route("/Product_detail/<int:id>")
@@ -148,6 +152,7 @@ def Customer_send_reset_email(user):
 If you did not make this request then simply you dont have to do anything and plz ignore this email and no changes will be made.
 '''
     mail.send(msg)
+
 
 @app.route("/Customer_reset_password", methods=['GET', 'POST'])
 def Customer_reset_request():

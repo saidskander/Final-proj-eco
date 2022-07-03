@@ -70,12 +70,6 @@ def ItemCarts():
     for key, product in session["AddToCartx"].items():
         index += 1 # product index
         product_quantity += int(product["quantity"])
-
         subtotal +=  ((int(product["quantity"]) * float(product["price"])) - (((int(product["quantity"]) * float(product["price"]))/100)* float(product["discount"]))) 
-
-
-
-
         GrandTotal = (( subtotal))
-
     return render_template('CustomerP/itemcarts.html',product_quantity=product_quantity,index=index, product=product, GrandTotal=GrandTotal, subtotal=subtotal)
