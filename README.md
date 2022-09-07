@@ -1,5 +1,5 @@
-# MPS
-## __MY_PET_STORY__
+# eCommerce
+## __eCommerce__
 
 Store is a python3-flask framework Shop.
 Flask-Framework powered jinja2-HTML5 Markdown.
